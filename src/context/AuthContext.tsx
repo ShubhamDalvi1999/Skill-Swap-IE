@@ -1,10 +1,11 @@
 // @ts-nocheck
 'use client'
 
-import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
+import type { ReactNode } from 'react'
 import { createBrowserClient } from '@supabase/ssr'
 import { AuthService } from '@/services/authService'
-import { UserProfile } from '@/types/user'
+import type { UserProfile } from '@/types/user'
 
 interface User {
   id: string

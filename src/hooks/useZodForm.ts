@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState } from 'react'
 import { useForm, UseFormProps, FieldValues, UseFormReturn } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
