@@ -3,14 +3,15 @@ export * from './user'
 export * from './auth'
 export * from './course'
 
-// Original type definitions in this file (non-duplicated types only)
-import { LucideIcon } from 'lucide-react'
+// Define core types without direct dependencies on external packages
+// IconComponent type to replace LucideIcon
+export type IconComponent = string
 
 // Renamed to avoid conflict with Course from './course'
 export interface NavItem {
   label: string
   href: string
-  icon?: LucideIcon
+  icon?: IconComponent
 }
 
 export interface Event {
