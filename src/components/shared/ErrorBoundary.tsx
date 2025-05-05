@@ -1,7 +1,8 @@
 'use client'
 
-import React, { Component, ErrorInfo, ReactNode } from 'react'
-import { AlertTriangle } from 'lucide-react'
+import React, { Component, type ReactNode } from 'react'
+import Icon from '@/components/ui/Icon'
+import { ICONS } from '@/lib/icons'
 
 interface ErrorBoundaryProps {
   children: ReactNode
@@ -11,6 +12,10 @@ interface ErrorBoundaryProps {
 interface ErrorBoundaryState {
   hasError: boolean
   error?: Error | null
+}
+
+interface ErrorInfo {
+  componentStack: string
 }
 
 class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
@@ -38,7 +43,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
       return (
         <div className="p-6 rounded-xl bg-red-500/10 border border-red-600 text-center">
           <div className="flex justify-center mb-4">
-            <AlertTriangle className="h-12 w-12 text-red-500" />
+            <Icon name="AlertTriangle" className="h-12 w-12 text-red-500" />
           </div>
           <h2 className="text-xl font-semibold mb-2">Something went wrong</h2>
           <p className="text-gray-400 mb-4">
@@ -50,6 +55,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
             </pre>
           </div>
           <button
+            type="button"
             onClick={() => this.setState({ hasError: false, error: null })}
             className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors"
           >

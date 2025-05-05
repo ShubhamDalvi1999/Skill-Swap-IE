@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { Folder, File, Settings, Play, Save } from 'lucide-react'
+import Icon from '@/components/ui/Icon'
+import { ICONS } from '@/lib/icons'
 import CodeEditor from './CodeEditor'
 
 interface FileStructure {
@@ -33,9 +34,9 @@ export default function ProjectWorkspace({ project }: ProjectWorkspaceProps) {
           type="button"
         >
           {item.type === 'folder' ? (
-            <Folder className="w-4 h-4 text-primary" />
+            <Icon name="Folder" className="w-4 h-4 text-primary" />
           ) : (
-            <File className="w-4 h-4 text-gray-400" />
+            <Icon name="File" className="w-4 h-4 text-gray-400" />
           )}
           <span className="text-sm">{item.name}</span>
         </button>
@@ -50,7 +51,7 @@ export default function ProjectWorkspace({ project }: ProjectWorkspaceProps) {
       <div className="w-64 bg-secondary border-r border-gray-800 p-4">
         <div className="flex items-center justify-between mb-4">
           <h2 className="font-semibold">{project.name}</h2>
-          <Settings className="w-4 h-4 text-gray-400" />
+          <Icon name="Settings" className="w-4 h-4 text-gray-400" />
         </div>
         <div>{renderFileTree(project.files)}</div>
       </div>
@@ -61,15 +62,15 @@ export default function ProjectWorkspace({ project }: ProjectWorkspaceProps) {
           <>
             <div className="bg-secondary border-b border-gray-800 px-4 py-2 flex items-center justify-between">
               <div className="flex items-center space-x-2">
-                <File className="w-4 h-4 text-gray-400" />
+                <Icon name="File" className="w-4 h-4 text-gray-400" />
                 <span className="text-sm">{selectedFile.name}</span>
               </div>
               <div className="flex items-center space-x-2">
-                <button className="p-1.5 text-gray-400 hover:text-white transition-colors">
-                  <Save className="w-4 h-4" />
+                <button type="button" className="p-1.5 text-gray-400 hover:text-white transition-colors">
+                  <Icon name="Save" className="w-4 h-4" />
                 </button>
-                <button className="p-1.5 text-gray-400 hover:text-white transition-colors">
-                  <Play className="w-4 h-4" />
+                <button type="button" className="p-1.5 text-gray-400 hover:text-white transition-colors">
+                  <Icon name="PlayCircle" className="w-4 h-4" />
                 </button>
               </div>
             </div>

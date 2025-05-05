@@ -1,6 +1,7 @@
 'use client'
 
-import { Calendar, Users } from 'lucide-react'
+import Icon from '@/components/ui/Icon'
+import { ICONS } from '@/lib/icons'
 import { Button } from '@/components/ui/button'
 
 interface Event {
@@ -42,16 +43,17 @@ export default function EventsList({ events }: EventsListProps) {
               <p className="text-gray-400 mb-4">{event.description}</p>
               <div className="flex items-center space-x-6 text-sm text-gray-400">
                 <div className="flex items-center">
-                  <Calendar className="w-4 h-4 mr-2" />
+                  <Icon name="Calendar" className="w-4 h-4 mr-2" />
                   {formatDate(event.date)}
                 </div>
                 <div className="flex items-center">
-                  <Users className="w-4 h-4 mr-2" />
+                  <Icon name="Users" className="w-4 h-4 mr-2" />
                   {event.attendees}/{event.maxAttendees} attending
                 </div>
               </div>
             </div>
             <Button
+              type="button"
               variant={event.attendees < event.maxAttendees ? 'default' : 'secondary'}
               disabled={event.attendees >= event.maxAttendees}
             >

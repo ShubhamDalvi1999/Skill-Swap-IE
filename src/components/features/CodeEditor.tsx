@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { Play, RotateCcw } from 'lucide-react'
+import Icon from '@/components/ui/Icon'
+import { ICONS } from '@/lib/icons'
 
 interface CodeEditorProps {
   initialCode?: string
@@ -38,17 +39,19 @@ export default function CodeEditor({
 
       <div className="flex items-center justify-between px-4 py-2 bg-gray-800 border-t border-gray-700">
         <button
+          type="button"
           onClick={() => setCode(initialCode)}
           className="flex items-center space-x-2 text-sm text-gray-400 hover:text-white transition-colors"
         >
-          <RotateCcw className="w-4 h-4" />
+          <Icon name="RotateCcw" className="w-4 h-4" />
           <span>Reset</span>
         </button>
         <button
+          type="button"
           onClick={() => onRun?.(code)}
           className="flex items-center space-x-2 px-4 py-1.5 bg-primary text-secondary rounded-md hover:bg-primary/90 transition-colors"
         >
-          <Play className="w-4 h-4" />
+          <Icon name="PlayCircle" className="w-4 h-4" />
           <span>Run</span>
         </button>
       </div>

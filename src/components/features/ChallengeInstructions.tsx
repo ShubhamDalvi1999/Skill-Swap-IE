@@ -6,6 +6,7 @@ import { ICONS } from '@/lib/icons'
 interface TestCase {
   input: string
   expectedOutput: string
+  id?: string
 }
 
 interface ChallengeInstructionsProps {
@@ -44,7 +45,7 @@ export default function ChallengeInstructions({
           <h3 className="text-lg font-semibold mb-4">Examples</h3>
           <div className="space-y-4">
             {examples.map((example, index) => (
-              <div key={`example-${index}`} className="bg-gray-800 rounded-lg p-4">
+              <div key={example.id || `example-${example.input}-${example.expectedOutput}`} className="bg-gray-800 rounded-lg p-4">
                 <div className="mb-2">
                   <span className="text-gray-400">Input: </span>
                   <code className="text-primary">{example.input}</code>
@@ -63,7 +64,7 @@ export default function ChallengeInstructions({
             <h3 className="text-lg font-semibold mb-4">Constraints</h3>
             <ul className="list-disc list-inside space-y-2 text-gray-300">
               {constraints.map((constraint, index) => (
-                <li key={`constraint-${index}`}>{constraint}</li>
+                <li key={`constraint-${constraint.substring(0, 20)}`}>{constraint}</li>
               ))}
             </ul>
           </div>

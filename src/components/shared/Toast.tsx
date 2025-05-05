@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import Icon from '@/components/ui/Icon'
 import { ICONS } from '@/lib/icons'
 
@@ -15,14 +15,14 @@ export interface ToastProps {
   onClose: (id: string) => void
 }
 
-const Toast: React.FC<ToastProps> = ({
+const Toast = ({
   id,
   type,
   title,
   message,
   duration = 5000,
   onClose,
-}) => {
+}: ToastProps) => {
   const [visible, setVisible] = useState(true)
 
   useEffect(() => {
