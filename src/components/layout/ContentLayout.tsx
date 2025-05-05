@@ -3,7 +3,8 @@
 import React from 'react'
 import type { ReactNode } from 'react'
 import { useState } from 'react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import Icon from '@/components/ui/Icon'
+import { ICONS } from '@/lib/icons'
 
 interface ContentLayoutProps {
   children: ReactNode
@@ -38,9 +39,9 @@ export default function ContentLayout({
         className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-secondary p-2 rounded-r-lg border border-l-0 border-gray-800"
       >
         {isSidebarOpen ? (
-          <ChevronLeft className="w-4 h-4" />
+          <Icon name={ICONS.previous} className="w-4 h-4" />
         ) : (
-          <ChevronRight className="w-4 h-4" />
+          <Icon name={ICONS.next} className="w-4 h-4" />
         )}
       </button>
 

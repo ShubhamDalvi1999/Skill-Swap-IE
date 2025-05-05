@@ -1,7 +1,9 @@
 'use client'
 
-import React, { createContext, useContext, useState, useCallback } from 'react'
-import { X } from 'lucide-react'
+import React, { createContext, useContext, useState } from 'react'
+import { useCallback } from 'react'
+import Icon from '@/components/ui/Icon'
+import { ICONS } from '@/lib/icons'
 import type { ReactNode } from 'react'
 
 type ToastType = 'success' | 'error' | 'info' | 'warning'
@@ -115,7 +117,7 @@ function ToastContainer({ toasts, removeToast }: { toasts: Toast[], removeToast:
             className="text-white/80 hover:text-white"
             aria-label="Close toast"
           >
-            <X size={18} />
+            <Icon name={ICONS.close} size={18} />
           </button>
         </div>
       ))}

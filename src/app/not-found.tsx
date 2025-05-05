@@ -1,7 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { MoveLeft } from 'lucide-react'
+import Icon from '@/components/ui/Icon'
+import { ICONS } from '@/lib/icons'
 
 export default function NotFound() {
   return (
@@ -33,7 +34,7 @@ export default function NotFound() {
             href="/"
             className="inline-flex items-center gap-2 bg-primary text-secondary px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors"
           >
-            <MoveLeft className="w-5 h-5" />
+            <Icon name={ICONS.previous} className="w-5 h-5" />
             Back to Home
           </Link>
         </div>
