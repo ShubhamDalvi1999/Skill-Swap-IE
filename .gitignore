@@ -79,7 +79,6 @@ next-env.d.ts
 *.txt
 *.md
 *.csv
-*.json
 *.yaml
 *.yml
 

@@ -1,0 +1,763 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Course Taking Platform API",
+    "description": "API documentation for the Course Taking Platform",
+    "version": "1.0.0",
+    "contact": {
+      "email": "support@coursesplatform.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "/api",
+      "description": "API Server"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "Course": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "course-123"
+          },
+          "title": {
+            "type": "string",
+            "example": "JavaScript Fundamentals"
+          },
+          "description": {
+            "type": "string",
+            "example": "Learn the basics of JavaScript programming"
+          },
+          "instructor": {
+            "type": "string",
+            "example": "John Smith"
+          },
+          "category": {
+            "type": "string",
+            "example": "Programming"
+          },
+          "level": {
+            "type": "string",
+            "enum": ["beginner", "intermediate", "advanced"],
+            "example": "beginner"
+          },
+          "rating": {
+            "type": "number",
+            "example": 4.5
+          },
+          "students_count": {
+            "type": "integer",
+            "example": 1250
+          },
+          "duration": {
+            "type": "integer",
+            "example": 14
+          },
+          "published_date": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2023-01-01T00:00:00Z"
+          },
+          "thumbnail": {
+            "type": "string",
+            "example": "https://example.com/thumbnail.jpg"
+          },
+          "price": {
+            "type": "number",
+            "example": 49.99
+          }
+        }
+      },
+      "UserProfile": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "user-123"
+          },
+          "firstName": {
+            "type": "string",
+            "example": "John"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Doe"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "john.doe@example.com"
+          },
+          "bio": {
+            "type": "string",
+            "example": "Software developer with 5 years of experience"
+          },
+          "avatar": {
+            "type": "string",
+            "example": "https://example.com/avatar.jpg"
+          },
+          "preferences": {
+            "type": "object",
+            "properties": {
+              "theme": {
+                "type": "string",
+                "example": "dark"
+              },
+              "emailNotifications": {
+                "type": "boolean",
+                "example": true
+              }
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2023-01-01T00:00:00Z"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "Error message"
+          },
+          "code": {
+            "type": "string",
+            "example": "ERROR_CODE"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/courses": {
+      "get": {
+        "summary": "Get all courses",
+        "description": "Retrieves a paginated list of all published courses",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Items per page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "courses": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Course"
+                      }
+                    },
+                    "total": {
+                      "type": "integer",
+                      "example": 100
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/db-status": {
+      "get": {
+        "summary": "Get database status",
+        "description": "Checks database connection and provides basic statistics",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "connected"
+                    },
+                    "statistics": {
+                      "type": "object",
+                      "properties": {
+                        "users": {
+                          "type": "integer",
+                          "example": 2500
+                        },
+                        "courses": {
+                          "type": "integer",
+                          "example": 50
+                        },
+                        "modules": {
+                          "type": "integer",
+                          "example": 250
+                        },
+                        "lessons": {
+                          "type": "integer",
+                          "example": 1200
+                        },
+                        "enrollments": {
+                          "type": "integer",
+                          "example": 5000
+                        }
+                      }
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2023-03-15T12:00:00Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden (non-admin user)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Database connection error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/signup": {
+      "post": {
+        "summary": "Create user account",
+        "description": "Creates a new user account and profile",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["email", "password", "firstName", "lastName"],
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "example": "user@example.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password",
+                    "example": "securePassword123"
+                  },
+                  "firstName": {
+                    "type": "string",
+                    "example": "John"
+                  },
+                  "lastName": {
+                    "type": "string",
+                    "example": "Doe"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "user-uuid"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "user@example.com"
+                        }
+                      }
+                    },
+                    "session": {
+                      "type": "object",
+                      "properties": {
+                        "access_token": {
+                          "type": "string",
+                          "example": "jwt-token"
+                        },
+                        "refresh_token": {
+                          "type": "string",
+                          "example": "refresh-token"
+                        },
+                        "expires_at": {
+                          "type": "integer",
+                          "example": 1679800000
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Email already in use",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/signin": {
+      "post": {
+        "summary": "User authentication",
+        "description": "Authenticates a user and provides session tokens",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["email", "password"],
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "example": "user@example.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password",
+                    "example": "securePassword123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Authentication successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "user-uuid"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "user@example.com"
+                        }
+                      }
+                    },
+                    "session": {
+                      "type": "object",
+                      "properties": {
+                        "access_token": {
+                          "type": "string",
+                          "example": "jwt-token"
+                        },
+                        "refresh_token": {
+                          "type": "string",
+                          "example": "refresh-token"
+                        },
+                        "expires_at": {
+                          "type": "integer",
+                          "example": 1679800000
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid credentials",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Too many failed attempts (locked out)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payments/create-intent": {
+      "post": {
+        "summary": "Create payment intent",
+        "description": "Creates a payment intent for purchasing a course",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["courseId"],
+                "properties": {
+                  "courseId": {
+                    "type": "string",
+                    "example": "course-id"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Payment intent created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "intent-id"
+                    },
+                    "clientSecret": {
+                      "type": "string",
+                      "example": "pi_client_secret"
+                    },
+                    "amount": {
+                      "type": "integer",
+                      "example": 4999
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "requires_payment_method"
+                    },
+                    "created": {
+                      "type": "integer",
+                      "example": 1678900000
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid course ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Already enrolled",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/profile": {
+      "get": {
+        "summary": "Get user profile",
+        "description": "Retrieves a user's profile information",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User profile retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserProfile"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Profile not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update user profile",
+        "description": "Updates a user's profile information",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "firstName": {
+                    "type": "string",
+                    "example": "John"
+                  },
+                  "lastName": {
+                    "type": "string",
+                    "example": "Smith"
+                  },
+                  "bio": {
+                    "type": "string",
+                    "example": "Updated biography"
+                  },
+                  "preferences": {
+                    "type": "object",
+                    "properties": {
+                      "theme": {
+                        "type": "string",
+                        "example": "light"
+                      },
+                      "emailNotifications": {
+                        "type": "boolean",
+                        "example": false
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Profile updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "profile": {
+                      "$ref": "#/components/schemas/UserProfile"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+} 
