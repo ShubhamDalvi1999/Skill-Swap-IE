@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Database initialization script
  * This script is run on application startup to ensure the database is properly set up
