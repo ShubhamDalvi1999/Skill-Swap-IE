@@ -2,11 +2,13 @@
 
 import React from 'react'
 import WorkspaceLayout from '@/components/layout/WorkspaceLayout'
+import MainLayout from '@/components/layout/MainLayout'
+import type { ReactNode } from 'react'
 
 export default function BuildLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: ReactNode
 }) {
   return (
     <WorkspaceLayout 
@@ -18,17 +20,17 @@ export default function BuildLayout({
               <h3 className="text-lg font-medium mb-3">Web Development</h3>
               <ul className="space-y-2">
                 <li>
-                  <button className="w-full text-left p-3 rounded-lg bg-secondary-800 border-l-4 border-primary-500">
+                  <button type="button" className="w-full text-left p-3 rounded-lg bg-secondary-800 border-l-4 border-primary-500">
                     Weather App
                   </button>
                 </li>
                 <li>
-                  <button className="w-full text-left p-3 rounded-lg hover:bg-secondary-800/50 text-gray-400">
+                  <button type="button" className="w-full text-left p-3 rounded-lg hover:bg-secondary-800/50 text-gray-400">
                     Todo Application
                   </button>
                 </li>
                 <li>
-                  <button className="w-full text-left p-3 rounded-lg hover:bg-secondary-800/50 text-gray-400">
+                  <button type="button" className="w-full text-left p-3 rounded-lg hover:bg-secondary-800/50 text-gray-400">
                     Blog Platform
                   </button>
                 </li>
@@ -38,12 +40,12 @@ export default function BuildLayout({
               <h3 className="text-lg font-medium mb-3">Mobile Development</h3>
               <ul className="space-y-2">
                 <li>
-                  <button className="w-full text-left p-3 rounded-lg hover:bg-secondary-800/50 text-gray-400">
+                  <button type="button" className="w-full text-left p-3 rounded-lg hover:bg-secondary-800/50 text-gray-400">
                     Fitness Tracker
                   </button>
                 </li>
                 <li>
-                  <button className="w-full text-left p-3 rounded-lg hover:bg-secondary-800/50 text-gray-400">
+                  <button type="button" className="w-full text-left p-3 rounded-lg hover:bg-secondary-800/50 text-gray-400">
                     Recipe App
                   </button>
                 </li>

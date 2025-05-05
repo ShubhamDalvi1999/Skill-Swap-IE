@@ -1,10 +1,12 @@
 'use client'
 
+import React from 'react'
+import type { ReactNode } from 'react'
 import { useState } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 interface ContentLayoutProps {
-  children: React.ReactNode
+  children: ReactNode
   sidebar?: React.ReactNode
   showProgress?: boolean
   progress?: number
@@ -31,6 +33,7 @@ export default function ContentLayout({
 
       {/* Toggle Button */}
       <button
+        type="button"
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
         className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-secondary p-2 rounded-r-lg border border-l-0 border-gray-800"
       >

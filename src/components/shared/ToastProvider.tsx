@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, useCallback } from 'react'
 import { X } from 'lucide-react'
+import type { ReactNode } from 'react'
 
 type ToastType = 'success' | 'error' | 'info' | 'warning'
 
@@ -44,7 +45,7 @@ export function useToastActions() {
   return context
 }
 
-export function ToastProvider({ children }: { children: React.ReactNode }) {
+export function ToastProvider({ children }: { children: ReactNode }) {
   const [toasts, setToasts] = useState<Toast[]>([])
 
   const addToast = useCallback((title: string, message: string, type: ToastType) => {
@@ -109,6 +110,7 @@ function ToastContainer({ toasts, removeToast }: { toasts: Toast[], removeToast:
             <p className="text-sm mt-1">{toast.message}</p>
           </div>
           <button 
+            type="button"
             onClick={() => removeToast(toast.id)}
             className="text-white/80 hover:text-white"
             aria-label="Close toast"

@@ -4,6 +4,7 @@ import React from 'react'
 import ContentLayout from '@/components/layout/ContentLayout'
 import LearningPathSidebar from '@/components/features/LearningPathSidebar'
 import MainLayout from '@/components/layout/MainLayout'
+import type { ReactNode } from 'react'
 
 // Define the types to match the LearningPathSidebar component
 type LessonStatus = 'completed' | 'in-progress' | 'locked';
@@ -70,7 +71,7 @@ const mockModules: Module[] = [
 export default function LearnLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: ReactNode
 }) {
   // In a real app, you'd load the current lesson data dynamically
   const currentLessonId = 'lesson-3'

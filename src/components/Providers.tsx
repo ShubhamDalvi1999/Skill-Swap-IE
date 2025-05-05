@@ -4,9 +4,10 @@ import React from 'react'
 import { AuthProvider } from '@/context/AuthContext'
 import { ToastProvider } from '@/components/shared/ToastProvider'
 import DatabaseInitializer from '@/components/DatabaseInitializer'
+import type { ReactNode } from 'react'
 
 interface ProvidersProps {
-  children: React.ReactNode
+  children: ReactNode
 }
 
 /**

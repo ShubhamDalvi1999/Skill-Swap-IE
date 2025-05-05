@@ -4,9 +4,10 @@ import React from 'react'
 import Navbar from './Navbar'
 import Footer from './Footer'
 import LoadingSkeleton from '../shared/LoadingSkeleton'
+import type { ReactNode } from 'react'
 
 interface MainLayoutProps {
-  children: React.ReactNode
+  children: ReactNode
 }
 
 export default function MainLayout({ children }: MainLayoutProps) {

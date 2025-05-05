@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import React from 'react'
+import type { ReactNode } from 'react'
 import './globals.css'
 import { Inter, Poppins, JetBrains_Mono, VT323 } from 'next/font/google'
 import Providers from '@/components/Providers'
@@ -40,7 +40,7 @@ export const metadata = {
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: ReactNode
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable} ${jetbrainsMono.variable} ${vt323.variable}`}>

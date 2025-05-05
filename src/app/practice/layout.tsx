@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import WorkspaceLayout from '@/components/layout/WorkspaceLayout'
 import LearningPathSidebar from '@/components/features/LearningPathSidebar'
 import ChallengeInstructions from '@/components/features/ChallengeInstructions'
+import type { ReactNode } from 'react'
 
 // Define types for our data structures
 type LessonStatus = 'completed' | 'in-progress' | 'locked'
@@ -62,7 +63,7 @@ const mockChallenge = {
   ],
 }
 
-export default function PracticeLayout({ children }: { children: React.ReactNode }) {
+export default function PracticeLayout({ children }: { children: ReactNode }) {
   const [selectedLessonId, setSelectedLessonId] = useState<string | null>(null)
 
   const handleSelectLesson = (lessonId: string) => {
