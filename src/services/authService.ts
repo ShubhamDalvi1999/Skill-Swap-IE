@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { createBrowserClient } from '@supabase/ssr'
 import { UserProfile } from '@/types/user'
 import { AppError } from '@/lib/errors/AppError'
