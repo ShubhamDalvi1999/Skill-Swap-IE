@@ -55,7 +55,15 @@ export default function CommunityPageLayout({
     <CommunityLayout
       sidebar={
         <div className="space-y-6">
-          <ProfileSummary user={mockUser} />
+          <ProfileSummary 
+            username={mockUser.name}
+            level={5}
+            totalXp={750}
+            badges={3}
+            dayStreak={12}
+            rank="Silver"
+            avatar={mockUser.avatar}
+          />
           <UpcomingEvents events={upcomingEvents} />
         </div>
       }
