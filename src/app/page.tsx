@@ -2,7 +2,6 @@
 
 import React from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import Navbar from '@/components/layout/Navbar'
 import { SplineSceneBasic } from '@/components/ui/spline-demo'
@@ -49,9 +48,9 @@ export default function LandingPage() {
           <div className="flex flex-col items-center">
             <p className="text-gray-300 text-sm mb-4">SUPPORTED BY</p>
             <div className="flex flex-wrap justify-center items-center gap-8">
-              <Image src="/images/github-logo.svg" alt="GitHub" width={100} height={40} className="opacity-80" />
-              <Image src="/images/csta-logo.svg" alt="CSTA" width={100} height={40} className="opacity-80" />
-              <Image src="/images/nys-logo.svg" alt="New York State" width={100} height={40} className="opacity-80" />
+              <img src="/images/github-logo.svg" alt="GitHub" width={100} height={40} className="opacity-80" />
+              <img src="/images/csta-logo.svg" alt="CSTA" width={100} height={40} className="opacity-80" />
+              <img src="/images/nys-logo.svg" alt="New York State" width={100} height={40} className="opacity-80" />
             </div>
           </div>
         </div>

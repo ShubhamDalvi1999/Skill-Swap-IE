@@ -1,7 +1,6 @@
 'use client'
 
 import React, { createContext, useContext, useState } from 'react'
-import { useCallback } from 'react'
 import Icon from '@/components/ui/Icon'
 import { ICONS } from '@/lib/icons'
 import type { ReactNode } from 'react'
@@ -50,7 +49,7 @@ export function useToastActions() {
 export function ToastProvider({ children }: { children: ReactNode }) {
   const [toasts, setToasts] = useState<Toast[]>([])
 
-  const addToast = useCallback((title: string, message: string, type: ToastType) => {
+  function addToast(title: string, message: string, type: ToastType) {
     const id = Date.now().toString()
     setToasts((prev) => [...prev, { id, title, message, type }])
     
@@ -58,27 +57,27 @@ export function ToastProvider({ children }: { children: ReactNode }) {
     setTimeout(() => {
       removeToast(id)
     }, 5000)
-  }, [])
+  }
 
-  const removeToast = useCallback((id: string) => {
+  function removeToast(id: string) {
     setToasts((prev) => prev.filter((toast) => toast.id !== id))
-  }, [])
+  }
 
-  const success = useCallback((title: string, message: string) => {
+  function success(title: string, message: string) {
     addToast(title, message, 'success')
-  }, [addToast])
+  }
 
-  const error = useCallback((title: string, message: string) => {
+  function error(title: string, message: string) {
     addToast(title, message, 'error')
-  }, [addToast])
+  }
 
-  const info = useCallback((title: string, message: string) => {
+  function info(title: string, message: string) {
     addToast(title, message, 'info')
-  }, [addToast])
+  }
 
-  const warning = useCallback((title: string, message: string) => {
+  function warning(title: string, message: string) {
     addToast(title, message, 'warning')
-  }, [addToast])
+  }
 
   const toastActions = {
     success,

@@ -1,14 +1,13 @@
 'use client'
 
-import React from 'react'
-import type { ReactNode } from 'react'
 import { useState } from 'react'
+import type { ReactNode } from 'react'
 import Icon from '@/components/ui/Icon'
 import { ICONS } from '@/lib/icons'
 
 interface ContentLayoutProps {
   children: ReactNode
-  sidebar?: React.ReactNode
+  sidebar?: ReactNode
   showProgress?: boolean
   progress?: number
 }
