@@ -11,10 +11,10 @@
  * @param importFn Function that returns a dynamic import
  * @returns A proxy that will load the module on first access
  */
-export function lazyImport<T>(importFn: () => Promise<{ default: T }>): T {
+export function lazyImport<T extends object>(importFn: () => Promise<{ default: T }>): T {
   let module: T | null = null;
   
-  return new Proxy({} as T, {
+  return new Proxy({} as unknown as T, {
     get: (target, prop) => {
       if (!module) {
         // This will be a promise on first access
@@ -24,7 +24,7 @@ export function lazyImport<T>(importFn: () => Promise<{ default: T }>): T {
         
         // If they try to access before the import completes
         if (!module) {
-          throw new Error(`Module not loaded yet. Please await the import first.`);
+          throw new Error('Module not loaded yet. Please await the import first.');
         }
       }
       
@@ -42,9 +42,9 @@ export function lazyImport<T>(importFn: () => Promise<{ default: T }>): T {
  * @returns The created class
  */
 export function createSafeClass<Base, T extends Base>(
-  BaseClass: new (...args: any[]) => Base,
-  constructorFn: (base: new (...args: any[]) => Base) => new (...args: any[]) => T
-): new (...args: any[]) => T {
+  BaseClass: new (...args: unknown[]) => Base,
+  constructorFn: (base: new (...args: unknown[]) => Base) => new (...args: unknown[]) => T
+): new (...args: unknown[]) => T {
   // Make sure BaseClass exists before extending it
   if (!BaseClass || typeof BaseClass !== 'function') {
     throw new Error('Cannot extend a null or undefined class. Ensure the base class is loaded.');
@@ -56,11 +56,13 @@ export function createSafeClass<Base, T extends Base>(
     console.error('Error creating class:', error);
     
     // Fallback implementation if the class extension fails
+    // Need to use 'any' here as TypeScript cannot safely type this dynamic class extension
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return class FallbackClass extends (BaseClass as any) {
-      constructor(...args: any[]) {
+      constructor(...args: unknown[]) {
         super(...args);
         console.warn('Using fallback class implementation due to errors in class creation');
       }
-    } as any;
+    } as unknown as new (...args: unknown[]) => T;
   }
 } 

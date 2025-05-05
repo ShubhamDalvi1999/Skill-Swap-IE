@@ -50,7 +50,7 @@ const ErrorBoundaryClass = createSafeClass(
           return (
             <div className="p-6 rounded-xl bg-red-500/10 border border-red-600 text-center">
               <div className="flex justify-center mb-4">
-                <React.Suspense fallback={<div className="h-12 w-12 bg-red-500/20 rounded-full animate-pulse"></div>}>
+                <React.Suspense fallback={<div className="h-12 w-12 bg-red-500/20 rounded-full animate-pulse" />}>
                   <IconComponent name={ICONS.warning || "AlertTriangle"} className="h-12 w-12 text-red-500" />
                 </React.Suspense>
               </div>
