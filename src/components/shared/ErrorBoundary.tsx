@@ -1,11 +1,15 @@
 // @ts-nocheck
 'use client'
 
-import React, { Component, type ReactNode } from 'react'
+import React, { Component, type ReactNode, Suspense } from 'react'
 import { createSafeClass } from '@/utils/dynamicImport'
-// Import these lazily to avoid potential circular dependencies
+
+// Instead of importing ICONS directly which could cause circular dependencies,
+// create a constant for the warning icon
+const WARNING_ICON = "AlertTriangle";
+
+// Import Icon component lazily to avoid potential circular dependencies
 const IconComponent = React.lazy(() => import('@/components/ui/Icon'))
-import { ICONS } from '@/lib/icons'
 
 interface ErrorBoundaryProps {
   children: ReactNode
@@ -20,6 +24,11 @@ interface ErrorBoundaryState {
 interface ErrorInfo {
   componentStack: string
 }
+
+// Create a IconFallback component to avoid the need for IconComponent during initial load
+const IconFallback = () => (
+  <div className="h-12 w-12 bg-red-500/20 rounded-full animate-pulse" />
+);
 
 // Use createSafeClass to safely extend React.Component
 const ErrorBoundaryClass = createSafeClass(
@@ -50,9 +59,9 @@ const ErrorBoundaryClass = createSafeClass(
           return (
             <div className="p-6 rounded-xl bg-red-500/10 border border-red-600 text-center">
               <div className="flex justify-center mb-4">
-                <React.Suspense fallback={<div className="h-12 w-12 bg-red-500/20 rounded-full animate-pulse" />}>
-                  <IconComponent name={ICONS.warning || "AlertTriangle"} className="h-12 w-12 text-red-500" />
-                </React.Suspense>
+                <Suspense fallback={<IconFallback />}>
+                  <IconComponent name={WARNING_ICON} className="h-12 w-12 text-red-500" />
+                </Suspense>
               </div>
               <h2 className="text-xl font-semibold mb-2">Something went wrong</h2>
               <p className="text-gray-400 mb-4">

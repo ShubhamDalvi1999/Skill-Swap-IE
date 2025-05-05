@@ -6,22 +6,45 @@ import { SignInFormValues, SignUpFormValues } from '@/schemas/authSchemas'
 import { supabaseConfig } from '@/config/env'
 import { createMockSupabaseClient } from '@/utils/supabase/mockClient'
 
+// Create a singleton instance to prevent multiple initializations
+let supabaseInstance = null;
+
+/**
+ * Get or create a Supabase client instance
+ * This prevents issues with multiple instances and circular dependencies
+ */
+function getSupabaseClient() {
+  // Don't create client during server-side rendering
+  if (typeof window === 'undefined') {
+    return createMockSupabaseClient();
+  }
+  
+  if (supabaseInstance) {
+    return supabaseInstance;
+  }
+  
+  const supabaseUrl = supabaseConfig.url;
+  const supabaseKey = supabaseConfig.anonKey;
+  
+  if (!supabaseUrl || !supabaseKey) {
+    supabaseInstance = createMockSupabaseClient();
+  } else {
+    try {
+      supabaseInstance = createBrowserClient(supabaseUrl, supabaseKey);
+    } catch (error) {
+      console.error('Failed to create Supabase client:', error);
+      supabaseInstance = createMockSupabaseClient();
+    }
+  }
+  
+  return supabaseInstance;
+}
+
 export class AuthService {
   private supabase;
 
   constructor() {
-    const supabaseUrl = supabaseConfig.url;
-    const supabaseKey = supabaseConfig.anonKey;
-    
-    if (!supabaseUrl || !supabaseKey) {
-      if (process.env.NODE_ENV === 'production' && typeof window === 'undefined') {
-        this.supabase = createMockSupabaseClient();
-      } else {
-        this.supabase = createBrowserClient(supabaseUrl, supabaseKey);
-      }
-    } else {
-      this.supabase = createBrowserClient(supabaseUrl, supabaseKey);
-    }
+    this.supabase = getSupabaseClient();
   }
 
   // Track login attempts to prevent brute force attacks
@@ -163,10 +186,8 @@ export class AuthService {
   /**
    * Sign in with email and password
    */
-  async signIn(formData: SignInFormValues) {
+  async signIn({ email, password }) {
     try {
-      const { email, password } = formData
-      
       // Check if the user is locked out
       this.checkLoginLockout(email)
       
@@ -239,46 +260,20 @@ export class AuthService {
   /**
    * Sign up with email, password, and full name
    */
-  async signUp(formData: SignUpFormValues) {
+  async signUp({ email, password, fullName }) {
     try {
-      const { email, password, fullName } = formData
-    
       const { data, error } = await this.supabase.auth.signUp({
         email,
         password,
         options: {
           data: {
-            full_name: fullName,
-          },
+            full_name: fullName
+          }
         }
       })
 
       if (error) throw AppError.auth(error.message, { cause: error })
-
-      // Create a profile for the new user using Prisma
-      if (data.user) {
-        try {
-          // Import prisma client dynamically to avoid circular dependencies
-          const { default: prisma } = await import('@/lib/prisma')
-          
-          await prisma.profile.create({
-            data: {
-              id: data.user.id,
-              email: data.user.email!,
-              fullName: fullName,
-              role: 'student',
-              joinedDate: new Date(),
-              lastSeen: new Date(),
-              skills: [],
-            }
-          })
-        } catch (profileError) {
-          console.error('Error creating profile with Prisma:', profileError)
-          // Continue with the signup process even if profile creation fails
-          // The profile will be created later when the user confirms their email
-        }
-      }
-
+      
       return data
     } catch (error) {
       throw AppError.from(error, 'Failed to sign up')
@@ -301,19 +296,17 @@ export class AuthService {
   }
 
   /**
-   * Send password reset email
+   * Reset password for an email
    */
-  async resetPassword(email: string) {
+  async resetPassword(email) {
     try {
-      const { error } = await this.supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/auth/update-password`,
-      })
+      const { error } = await this.supabase.auth.resetPasswordForEmail(email)
       
       if (error) throw AppError.auth(error.message, { cause: error })
       
       return true
     } catch (error) {
-      throw AppError.from(error, 'Failed to send password reset email')
+      throw AppError.from(error, 'Failed to reset password')
     }
   }
 
@@ -335,9 +328,9 @@ export class AuthService {
   }
 
   /**
-   * Set up an auth state change listener
+   * Listen for auth state changes
    */
-  onAuthStateChange(callback: (event: string, session: any) => void) {
-    return this.supabase.auth.onAuthStateChange(callback)
+  onAuthStateChange(callback) {
+    return this.supabase.auth.onAuthStateChange(callback);
   }
 } 

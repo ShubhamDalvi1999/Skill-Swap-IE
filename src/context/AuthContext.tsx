@@ -3,7 +3,6 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import type { ReactNode } from 'react'
-import { createBrowserClient } from '@supabase/ssr'
 import { AuthService } from '@/services/authService'
 import type { UserProfile } from '@/types/user'
 
@@ -39,15 +38,33 @@ interface AuthProviderProps {
   children: ReactNode
 }
 
+// Create service lazily to prevent "Super constructor null" error
+let authServiceInstance: AuthService | null = null;
+
+const getAuthService = () => {
+  if (typeof window === 'undefined') {
+    return null; // Don't initialize during SSR
+  }
+  if (!authServiceInstance) {
+    authServiceInstance = new AuthService();
+  }
+  return authServiceInstance;
+};
+
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User | null>(null)
   const [profile, setProfile] = useState<UserProfile | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   
-  const authService = new AuthService()
-
   useEffect(() => {
+    // Only initialize auth service on the client side
+    const authService = getAuthService();
+    if (!authService) {
+      setIsLoading(false);
+      return;
+    }
+    
     const initializeAuth = async () => {
       try {
         setIsLoading(true)
@@ -92,10 +109,13 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const signIn = async (email: string, password: string) => {
     try {
+      const authService = getAuthService();
+      if (!authService) throw new Error('Auth service not available');
+      
       setIsLoading(true)
       setError(null)
       
-      const { session } = await authService.signIn(email, password)
+      const { session } = await authService.signIn({ email, password })
       
       if (session?.user) {
         setUser(session.user)
@@ -113,10 +133,13 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const signUp = async (email: string, password: string, fullName: string) => {
     try {
+      const authService = getAuthService();
+      if (!authService) throw new Error('Auth service not available');
+      
       setIsLoading(true)
       setError(null)
       
-      await authService.signUp(email, password, fullName)
+      await authService.signUp({ email, password, fullName })
       
       // User will need to verify email before signing in
     } catch (error: any) {
@@ -130,6 +153,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const signOut = async () => {
     try {
+      const authService = getAuthService();
+      if (!authService) throw new Error('Auth service not available');
+      
       setIsLoading(true)
       setError(null)
       
@@ -148,6 +174,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const resetPassword = async (email: string) => {
     try {
+      const authService = getAuthService();
+      if (!authService) throw new Error('Auth service not available');
+      
       setIsLoading(true)
       setError(null)
       
@@ -163,6 +192,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const updateProfile = async (data: Partial<UserProfile>) => {
     try {
+      const authService = getAuthService();
+      if (!authService) throw new Error('Auth service not available');
+      
       setIsLoading(true)
       setError(null)
       
