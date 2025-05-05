@@ -69,14 +69,10 @@ export function createSafeClass<Base, T extends Base>(
   
   try {
     // Create a wrapper around the base class to ensure it's properly initialized
-    const SafeBaseClass = class extends (BaseClass as any) {
-      constructor(...args: unknown[]) {
-        super(...args);
-      }
-    };
+    const SafeBaseClass = class extends (BaseClass as unknown as new (...args: unknown[]) => Base) {};
     
     // Now create the actual class using our safe base
-    return constructorFn(SafeBaseClass as any);
+    return constructorFn(SafeBaseClass as unknown as new (...args: unknown[]) => Base);
   } catch (error) {
     console.error('Error creating class:', error);
     

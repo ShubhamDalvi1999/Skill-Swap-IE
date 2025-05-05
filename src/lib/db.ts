@@ -6,20 +6,23 @@ import { PrismaClient } from '@prisma/client'
 
 const globalForPrisma = global as unknown as { prisma: PrismaClient }
 
+// Type for mock database operations
+type DbOperation = Record<string, unknown>
+
 export function createPrismaClient(): PrismaClient {
   try {
     if (process.env.NODE_ENV === 'production') {
       // In production, create a new instance each time
       return new PrismaClient()
-    } else {
-      // In development, use a global variable to reuse connections
-      if (!globalForPrisma.prisma) {
-        globalForPrisma.prisma = new PrismaClient({
-          log: ['query', 'error', 'warn'],
-        })
-      }
-      return globalForPrisma.prisma
     }
+    
+    // In development, use a global variable to reuse connections
+    if (!globalForPrisma.prisma) {
+      globalForPrisma.prisma = new PrismaClient({
+        log: ['query', 'error', 'warn'],
+      })
+    }
+    return globalForPrisma.prisma
   } catch (error) {
     console.error('Error initializing Prisma client:', error)
     // Return a mock client when real connection fails
@@ -35,10 +38,10 @@ function getMockPrismaClient(): PrismaClient {
   return {
     $connect: () => Promise.resolve(),
     $disconnect: () => Promise.resolve(),
-    $on: () => { return { } as any },
+    $on: () => { return {} as Record<string, unknown> },
     $executeRaw: () => Promise.resolve(0),
     $queryRaw: () => Promise.resolve([]),
-    $transaction: (fn: any) => Promise.resolve(fn([])),
+    $transaction: (fn: (prisma: unknown[]) => unknown) => Promise.resolve(fn([])),
     // Add mock implementations for models you use
     user: createMockModel(),
     course: createMockModel(),
@@ -52,9 +55,9 @@ function createMockModel() {
     findUnique: () => Promise.resolve(null),
     findFirst: () => Promise.resolve(null),
     findMany: () => Promise.resolve([]),
-    create: (args: any) => Promise.resolve(args.data),
-    update: (args: any) => Promise.resolve(args.data),
-    upsert: (args: any) => Promise.resolve(args.create),
+    create: (args: DbOperation) => Promise.resolve(args.data as DbOperation),
+    update: (args: DbOperation) => Promise.resolve(args.data as DbOperation),
+    upsert: (args: DbOperation) => Promise.resolve(args.create as DbOperation),
     delete: () => Promise.resolve({}),
     count: () => Promise.resolve(0),
   }

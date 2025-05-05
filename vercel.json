@@ -5,11 +5,6 @@
   "devCommand": "npm run dev",
   "crons": [],
   "trailingSlash": false,
-  "functions": {
-    "api/**": {
-      "memory": 1024
-    }
-  },
   "headers": [
     {
       "source": "/(.*)",
