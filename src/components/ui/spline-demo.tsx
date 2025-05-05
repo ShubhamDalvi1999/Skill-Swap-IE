@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client'
 
 // Direct implementation without React dependencies

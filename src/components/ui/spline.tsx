@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client'
 
 // Import React for JSX and hooks

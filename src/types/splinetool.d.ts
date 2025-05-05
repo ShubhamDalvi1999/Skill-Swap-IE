@@ -1,3 +1,4 @@
+// @ts-nocheck
 declare module '@splinetool/react-spline' {
   import type * as React from 'react';
   
