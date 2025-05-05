@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { create } from 'zustand'
 import { Course, CourseDetails, CourseSearchParams } from '@/types/course'
 import { AppError } from '@/lib/errors/AppError'

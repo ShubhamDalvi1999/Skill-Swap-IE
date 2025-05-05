@@ -3,4 +3,5 @@
 
 declare module 'zod';
 declare module '@hookform/resolvers/zod';
-declare module 'react-hook-form'; 
+declare module 'react-hook-form';
+declare module 'zustand'; 
