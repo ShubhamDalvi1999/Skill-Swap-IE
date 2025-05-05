@@ -1,7 +1,7 @@
 'use client'
 
-import Image from 'next/image'
-import { Heart, MessageCircle, Share2 } from 'lucide-react'
+import Icon from '@/components/ui/Icon'
+import { ICONS } from '@/lib/icons'
 
 interface Author {
   name: string
@@ -32,11 +32,10 @@ export default function SocialFeed({ posts }: SocialFeedProps) {
         >
           <div className="flex items-start space-x-4">
             <div className="relative w-10 h-10 rounded-full overflow-hidden">
-              <Image
+              <img
                 src={post.author.avatar}
                 alt={post.author.name}
-                fill
-                className="object-cover"
+                className="object-cover w-full h-full"
               />
             </div>
             <div className="flex-1">
@@ -49,16 +48,16 @@ export default function SocialFeed({ posts }: SocialFeedProps) {
               <p className="mt-3">{post.content}</p>
               
               <div className="mt-4 flex items-center space-x-6">
-                <button className="flex items-center space-x-2 text-gray-400 hover:text-primary transition-colors">
-                  <Heart className="w-5 h-5" />
+                <button type="button" className="flex items-center space-x-2 text-gray-400 hover:text-primary transition-colors">
+                  <Icon name={ICONS.success} className="w-5 h-5" />
                   <span className="text-sm">{post.likes}</span>
                 </button>
-                <button className="flex items-center space-x-2 text-gray-400 hover:text-primary transition-colors">
-                  <MessageCircle className="w-5 h-5" />
+                <button type="button" className="flex items-center space-x-2 text-gray-400 hover:text-primary transition-colors">
+                  <Icon name={ICONS.notifications} className="w-5 h-5" />
                   <span className="text-sm">{post.comments}</span>
                 </button>
-                <button className="flex items-center space-x-2 text-gray-400 hover:text-primary transition-colors">
-                  <Share2 className="w-5 h-5" />
+                <button type="button" className="flex items-center space-x-2 text-gray-400 hover:text-primary transition-colors">
+                  <Icon name={ICONS.menu} className="w-5 h-5" />
                   <span className="text-sm">Share</span>
                 </button>
               </div>

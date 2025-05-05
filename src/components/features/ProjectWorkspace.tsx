@@ -30,6 +30,7 @@ export default function ProjectWorkspace({ project }: ProjectWorkspaceProps) {
           className={`flex items-center space-x-2 w-full px-3 py-1.5 rounded-lg hover:bg-gray-800 transition-colors ${
             selectedFile?.name === item.name ? 'bg-gray-800' : ''
           }`}
+          type="button"
         >
           {item.type === 'folder' ? (
             <Folder className="w-4 h-4 text-primary" />

@@ -15,7 +15,7 @@ const InviteFriend = () => {
             <p className="text-gray-400">Get 1 month of Pro for every friend who joins</p>
           </div>
         </div>
-        <button className="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+        <button type="button" className="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
           Share Invite Link
         </button>
       </div>

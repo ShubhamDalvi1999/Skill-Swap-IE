@@ -61,6 +61,7 @@ export default function LearningPathSidebar({
                         ? "opacity-50 cursor-not-allowed" 
                         : "cursor-pointer"
                     )}
+                    type="button"
                   >
                     <div className="flex items-center space-x-4">
                       {getStatusIcon(lesson.status)}

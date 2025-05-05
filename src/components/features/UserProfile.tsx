@@ -1,7 +1,7 @@
 'use client'
 
-import Image from 'next/image'
-import { Medal, Book, Clock, Trophy } from 'lucide-react'
+import Icon from '@/components/ui/Icon'
+import { ICONS } from '@/lib/icons'
 import { Button } from '@/components/ui/button'
 
 interface UserStats {
@@ -35,11 +35,10 @@ export default function UserProfile({
       <div className="p-6">
         <div className="flex flex-col items-center -mt-16">
           <div className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-secondary">
-            <Image
+            <img
               src={avatar}
               alt={name}
-              fill
-              className="object-cover"
+              className="object-cover w-full h-full"
             />
           </div>
           <h2 className="mt-4 text-xl font-semibold">{name}</h2>
@@ -53,7 +52,7 @@ export default function UserProfile({
         <div className="mt-8 grid grid-cols-2 gap-4">
           <div className="bg-gray-800 rounded-lg p-4">
             <div className="flex items-center space-x-3">
-              <Medal className="w-5 h-5 text-primary" />
+              <Icon name={ICONS.build} className="w-5 h-5 text-primary" />
               <div>
                 <div className="text-2xl font-bold">{stats.completedCourses}</div>
                 <div className="text-sm text-gray-400">Courses Completed</div>
@@ -62,7 +61,7 @@ export default function UserProfile({
           </div>
           <div className="bg-gray-800 rounded-lg p-4">
             <div className="flex items-center space-x-3">
-              <Clock className="w-5 h-5 text-primary" />
+              <Icon name={ICONS.duration} className="w-5 h-5 text-primary" />
               <div>
                 <div className="text-2xl font-bold">{stats.hoursLearned}</div>
                 <div className="text-sm text-gray-400">Hours Learned</div>
@@ -71,7 +70,7 @@ export default function UserProfile({
           </div>
           <div className="bg-gray-800 rounded-lg p-4">
             <div className="flex items-center space-x-3">
-              <Book className="w-5 h-5 text-primary" />
+              <Icon name={ICONS.learn} className="w-5 h-5 text-primary" />
               <div>
                 <div className="text-2xl font-bold">{stats.skillsLearned}</div>
                 <div className="text-sm text-gray-400">Skills Learned</div>
@@ -80,7 +79,7 @@ export default function UserProfile({
           </div>
           <div className="bg-gray-800 rounded-lg p-4">
             <div className="flex items-center space-x-3">
-              <Trophy className="w-5 h-5 text-primary" />
+              <Icon name={ICONS.success} className="w-5 h-5 text-primary" />
               <div>
                 <div className="text-2xl font-bold">{stats.achievements}</div>
                 <div className="text-sm text-gray-400">Achievements</div>

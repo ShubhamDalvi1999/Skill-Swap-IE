@@ -1,10 +1,9 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import Icon from '@/components/ui/Icon'
 import { ICONS } from '@/lib/icons'
-import { Course, UserCourse } from '@/types/course'
+import type { Course, UserCourse } from '@/types/course'
 
 interface CourseCardProps {
   course: Course | UserCourse
@@ -23,11 +22,10 @@ export default function CourseCard({ course, showProgress = false }: CourseCardP
       <div className="bg-secondary rounded-xl overflow-hidden border border-gray-800 hover:border-primary/50 transition-colors">
         {/* Course Image */}
         <div className="relative h-48">
-          <Image
+          <img
             src={course.thumbnail || '/placeholder-course.jpg'}
             alt={course.title}
-            fill
-            className="object-cover"
+            className="object-cover w-full h-full"
           />
           {isUserCourse && showProgress && (
             <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-700">

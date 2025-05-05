@@ -1,7 +1,6 @@
 'use client'
 
 import React from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import LoadingSkeleton from '../shared/LoadingSkeleton'
 
@@ -44,8 +43,8 @@ export default function ProfileSummary({
 
         {/* Stats Grid Loading */}
         <div className="grid grid-cols-2 gap-3 mb-4">
-          {[...Array(4)].map((_, i) => (
-            <div key={i} className="space-y-2">
+          {['xp', 'rank', 'badges', 'streak'].map((item, i) => (
+            <div key={`skeleton-${item}`} className="space-y-2">
               <LoadingSkeleton className="h-4 w-12" />
               <LoadingSkeleton className="h-3 w-16" />
             </div>
@@ -63,13 +62,10 @@ export default function ProfileSummary({
       {/* User Info */}
       <div className="flex items-center gap-8 mb-12">
         <div className="relative w-28 h-28 rounded-full overflow-hidden flex-shrink-0 border-3 border-primary/20">
-          <Image
+          <img
             src={avatar}
             alt={username}
-            fill
-            sizes="(max-width: 768px) 112px, 112px"
-            priority
-            className="object-cover"
+            className="object-cover w-full h-full"
           />
         </div>
         <div className="flex-1 min-w-0">

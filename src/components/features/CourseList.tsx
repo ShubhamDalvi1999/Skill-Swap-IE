@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 
 interface Course {
   id: string
@@ -43,7 +42,7 @@ export default function CourseList() {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-[400px]">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary" />
       </div>
     )
   }
@@ -53,6 +52,7 @@ export default function CourseList() {
       <div className="text-center py-10">
         <p className="text-red-500 mb-4">{error}</p>
         <button 
+          type="button"
           onClick={() => window.location.reload()}
           className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors"
         >
@@ -79,11 +79,10 @@ export default function CourseList() {
           className="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
         >
           <div className="relative h-48">
-            <Image
+            <img
               src={course.thumbnail}
               alt={course.title}
-              fill
-              className="object-cover"
+              className="object-cover w-full h-full"
             />
           </div>
           <div className="p-6">

@@ -1,9 +1,9 @@
 'use client'
 
 import React from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
-import { BookOpen, User } from 'lucide-react'
+import Icon from '@/components/ui/Icon'
+import { ICONS } from '@/lib/icons'
 
 // Temporary user data
 const USER_DATA = {
@@ -43,21 +43,20 @@ export default function ProfilePage() {
     <div className="min-h-screen">
       {/* Banner Image */}
       <div className="relative h-64 w-full rounded-xl overflow-hidden mb-20">
-        <Image
+        <img
           src="/images/courses/react-advanced.jpg"
-          alt="Profile banner"
-          fill
-          className="object-cover"
+          alt="Banner"
+          className="object-cover w-full h-full"
         />
         {/* Profile Picture */}
         <div className="absolute -bottom-16 left-8">
           <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-background shadow-lg">
-            <Image
+            <img
               src="/images/avatars/dr-ai-1.png"
-              alt="Profile picture"
+              alt="Avatar"
               width={128}
               height={128}
-              className="object-cover"
+              className="object-cover w-full h-full"
             />
           </div>
         </div>
@@ -87,10 +86,10 @@ export default function ProfilePage() {
             </div>
           </div>
           <div className="flex gap-3">
-            <button className="px-4 py-2 bg-primary text-secondary rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors">
+            <button type="button" className="px-4 py-2 bg-primary text-secondary rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors">
               Follow
             </button>
-            <button className="px-4 py-2 bg-secondary rounded-lg text-sm hover:bg-secondary/80 transition-colors">
+            <button type="button" className="px-4 py-2 bg-secondary rounded-lg text-sm hover:bg-secondary/80 transition-colors">
               Edit Profile
             </button>
           </div>
@@ -99,12 +98,12 @@ export default function ProfilePage() {
         {/* Social Stats */}
         <div className="flex gap-6 text-sm mb-8">
           <div className="flex items-center gap-1">
-            <User className="w-4 h-4 text-gray-400" />
+            <Icon name={ICONS.profile} className="w-4 h-4 text-gray-400" />
             <span className="font-medium">{USER_DATA.following}</span>
             <span className="text-gray-400">following</span>
           </div>
           <div className="flex items-center gap-1">
-            <User className="w-4 h-4 text-gray-400" />
+            <Icon name={ICONS.profile} className="w-4 h-4 text-gray-400" />
             <span className="font-medium">{USER_DATA.followers}</span>
             <span className="text-gray-400">followers</span>
           </div>
@@ -127,7 +126,7 @@ export default function ProfilePage() {
               </p>
               <div className="flex flex-wrap gap-3 mt-4">
                 {USER_DATA.skills.map((skill, index) => (
-                  <span key={index} className="px-3 py-1 bg-gray-800 rounded-full text-xs text-gray-300">
+                  <span key={`skill-${index}`} className="px-3 py-1 bg-gray-800 rounded-full text-xs text-gray-300">
                     {skill}
                   </span>
                 ))}
@@ -160,7 +159,7 @@ export default function ProfilePage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {USER_DATA.stats.projectsCompleted > 0 ? (
                   [...Array(USER_DATA.stats.projectsCompleted)].map((_, i) => (
-                    <div key={i} className="border border-gray-800 rounded-lg p-4 hover:border-primary/50 transition-colors">
+                    <div key={`project-${i}`} className="border border-gray-800 rounded-lg p-4 hover:border-primary/50 transition-colors">
                       <div className="flex items-center gap-3 mb-3">
                         <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
                           <span className="text-lg">💻</span>
@@ -192,7 +191,7 @@ export default function ProfilePage() {
               <h2 className="text-lg font-semibold mb-4">Learning Stats</h2>
               <div className="grid grid-cols-2 gap-4">
                 <div className="text-center p-4 bg-gray-800 rounded-lg">
-                  <BookOpen className="w-6 h-6 text-primary mx-auto mb-2" />
+                  <Icon name={ICONS.learn} className="w-6 h-6 text-primary mx-auto mb-2" />
                   <div className="text-2xl font-bold mb-1">{USER_DATA.stats.exercises}</div>
                   <div className="text-xs text-gray-400">Exercises</div>
                 </div>
@@ -218,13 +217,13 @@ export default function ProfilePage() {
             <div className="bg-secondary rounded-xl p-6">
               <h3 className="text-lg font-semibold mb-4">Learning Streak</h3>
               <div className="grid grid-cols-7 gap-2">
-                {[...Array(7)].map((_, i) => (
-                  <div key={i} className="flex flex-col items-center">
+                {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day, i) => (
+                  <div key={`day-${day}`} className="flex flex-col items-center">
                     <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${i < USER_DATA.stats.dailyStreak ? 'bg-primary/20 text-primary' : 'bg-gray-800 text-gray-500'}`}>
                       {i < USER_DATA.stats.dailyStreak ? '✓' : ''}
                     </div>
                     <div className="text-xs mt-1 text-gray-400">
-                      {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i]}
+                      {day}
                     </div>
                   </div>
                 ))}

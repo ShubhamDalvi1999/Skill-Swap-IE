@@ -32,7 +32,7 @@ export default function EventCard({ event }: EventCardProps) {
         </div>
       </div>
       <div className="mt-4 flex justify-end">
-        <button className="text-sm text-primary hover:text-primary/80 font-medium">
+        <button type="button" className="text-sm text-primary hover:text-primary/80 font-medium">
           Learn more →
         </button>
       </div>
