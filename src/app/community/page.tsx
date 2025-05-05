@@ -3,8 +3,8 @@
 import { useState } from 'react'
 import SocialFeed from '@/components/features/SocialFeed'
 import EventsList from '@/components/features/EventsList'
-import { User } from '@/types'
-import Image from 'next/image'
+import TopContributors from '@/components/features/TopContributors'
+import type { User } from '@/types'
 
 // Mock data
 const posts = [
@@ -53,6 +53,12 @@ const events = [
   },
 ]
 
+const topContributors = [
+  { id: 1, name: 'Contributor 1', points: 100, avatar: 'https://picsum.photos/seed/contributor1/32/32' },
+  { id: 2, name: 'Contributor 2', points: 80, avatar: 'https://picsum.photos/seed/contributor2/32/32' },
+  { id: 3, name: 'Contributor 3', points: 60, avatar: 'https://picsum.photos/seed/contributor3/32/32' }
+];
+
 const suggestedUsers: User[] = [
   {
     id: '3',
@@ -79,6 +85,7 @@ export default function CommunityPage() {
         <h1 className="text-2xl font-bold">Community</h1>
         <div className="flex space-x-4">
           <button
+            type="button"
             onClick={() => setActiveTab('feed')}
             className={`px-4 py-2 rounded-lg transition-colors ${
               activeTab === 'feed'
@@ -89,6 +96,7 @@ export default function CommunityPage() {
             Feed
           </button>
           <button
+            type="button"
             onClick={() => setActiveTab('events')}
             className={`px-4 py-2 rounded-lg transition-colors ${
               activeTab === 'events'
@@ -127,26 +135,9 @@ export default function CommunityPage() {
               </div>
             </div>
           </div>
-          <div className="bg-secondary rounded-xl p-6">
-            <h2 className="text-lg font-semibold mb-4">Top Contributors</h2>
-            <div className="space-y-4">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="flex items-center space-x-3">
-                  <Image
-                    src={`https://picsum.photos/seed/contributor${i}/32/32`}
-                    alt={`Contributor ${i}`}
-                    width={32}
-                    height={32}
-                    className="rounded-full"
-                  />
-                  <div>
-                    <div className="font-medium">Contributor {i}</div>
-                    <div className="text-sm text-gray-400">{100 - i * 20} points</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          
+          <TopContributors contributors={topContributors} />
+          
           <div className="bg-secondary rounded-xl p-6">
             <h2 className="text-xl font-semibold mb-4">Suggested Connections</h2>
             <div className="space-y-4">
@@ -165,7 +156,10 @@ export default function CommunityPage() {
                       <p className="text-sm text-gray-400">{user.role}</p>
                     </div>
                   </div>
-                  <button className="text-sm text-primary hover:text-primary/80 font-medium">
+                  <button 
+                    type="button"
+                    className="text-sm text-primary hover:text-primary/80 font-medium"
+                  >
                     Follow
                   </button>
                 </div>
