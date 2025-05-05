@@ -1,0 +1,85 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env*.local
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts 
+
+
+# ps1 and sh files
+*.ps1
+*.sh
+
+#images 
+/images
+*.jpg
+*.png
+*.jpeg
+*.gif
+*.svg
+*.webp
+
+
+#prisma
+/prisma
+
+#scripts
+/scripts
+
+# Docs
+/docs
+
+#Database
+/db
+
+
+# images
+/public/images
+
+#videos
+/public/videos
+
+#audio
+/public/audio
+
+#fonts
+/public/fonts
+
+#icons
+/public/icons
+
+.qodo
+
+# batch files
+*.bat
+
+#text
+*.txt
+*.md
+*.csv
+*.json
+*.yaml
+*.yml
+

@@ -1,0 +1,265 @@
+@startuml Skill-Swap Learning Platform ER Diagram
+
+' Entity color scheme
+!define USER_COLOR #B4D7FF
+!define COURSE_COLOR #FFCCAA
+!define MODULE_COLOR #FFE680
+!define ASSESSMENT_COLOR #D4FFAA
+!define PROGRESS_COLOR #CCFFD9
+!define GAMIFICATION_COLOR #D8CCFF
+!define RATING_COLOR #FFCCCC
+!define SUPPORT_COLOR #E0E0E0
+!define TOKEN_COLOR #FDE9D9
+
+' Use splines for connectors
+skinparam linetype ortho
+
+' Title
+title Skill-Swap Learning Platform - ER Diagram
+
+' ENTITIES
+
+' Users
+entity "Users" as Users {
+  *user_id : INT <<PK>>
+  --
+  name : VARCHAR
+  email : VARCHAR <<UK>>
+  password_hash : VARCHAR
+  profile_info : TEXT
+  role_flags : VARCHAR
+}
+
+' Course Structure
+entity "Courses" as Courses {
+  *course_id : INT <<PK>>
+  --
+  title : VARCHAR
+  description : TEXT
+  difficulty_level : INT <<FK>>
+  xp_points : INT
+  created_date : TIMESTAMP
+  status : VARCHAR
+  launch_token_cost : INT
+}
+
+entity "Modules" as Modules {
+  *module_id : INT <<PK>>
+  --
+  *course_id : INT <<FK>>
+  title : VARCHAR
+  position : INT
+}
+
+entity "Lessons" as Lessons {
+  *lesson_id : INT <<PK>>
+  --
+  *module_id : INT <<FK>>
+  title : VARCHAR
+  content_type : VARCHAR
+  content_url : VARCHAR
+  position : INT
+}
+
+' Assessments
+entity "Quizzes" as Quizzes {
+  *quiz_id : INT <<PK>>
+  --
+  *module_id : INT <<FK>>
+  title : VARCHAR
+  instructions : TEXT
+  max_score : INT
+}
+
+entity "Assignments" as Assignments {
+  *assignment_id : INT <<PK>>
+  --
+  *module_id : INT <<FK>>
+  title : VARCHAR
+  description : TEXT
+  due_date : DATE
+  points : INT
+}
+
+entity "Projects" as Projects {
+  *project_id : INT <<PK>>
+  --
+  *course_id : INT <<FK>>
+  title : VARCHAR
+  description : TEXT
+  points : INT
+}
+
+' Enrollment & Progress
+entity "Enrollments" as Enrollments {
+  *enrollment_id : INT <<PK>>
+  --
+  *student_id : INT <<FK>>
+  *course_id : INT <<FK>>
+  enroll_date : DATE
+  progress_percent : INT
+  status : VARCHAR
+  completed_date : TIMESTAMP
+  final_score : FLOAT
+  trophy_earned : INT <<FK>>
+  certificate_id : INT <<FK>>
+  tokens_spent : INT
+}
+
+' Gamification
+entity "Difficulty" as Difficulty {
+  *difficulty_id : INT <<PK>>
+  --
+  name : VARCHAR
+  trophy_type : VARCHAR
+  xp_factor : FLOAT
+}
+
+entity "Trophies" as Trophies {
+  *trophy_id : INT <<PK>>
+  --
+  name : VARCHAR
+  icon_image : VARCHAR
+  description : TEXT
+}
+
+entity "UserTrophies" as UserTrophies {
+  *user_id : INT <<FK>>
+  *trophy_id : INT <<FK>>
+  *course_id : INT <<FK>>
+  --
+  date_earned : TIMESTAMP
+}
+
+' Ratings
+entity "CourseRatings" as CourseRatings {
+  *rating_id : INT <<PK>>
+  --
+  *course_id : INT <<FK>>
+  *student_id : INT <<FK>>
+  rating : INT
+  review_text : TEXT
+  rating_date : TIMESTAMP
+}
+
+entity "InstructorRatings" as InstructorRatings {
+  *instructor_rating_id : INT <<PK>>
+  --
+  *instructor_id : INT <<FK>>
+  *student_id : INT <<FK>>
+  *course_id : INT <<FK>>
+  rating : INT
+  review_text : TEXT
+  rating_date : TIMESTAMP
+}
+
+entity "StudentRatings" as StudentRatings {
+  *student_rating_id : INT <<PK>>
+  --
+  *student_id : INT <<FK>>
+  *instructor_id : INT <<FK>>
+  *course_id : INT <<FK>>
+  rating : INT
+  feedback_text : TEXT
+  rating_date : TIMESTAMP
+}
+
+' Supporting Tables
+entity "Tag" as Tag {
+  *tag_id : INT <<PK>>
+  --
+  name : VARCHAR <<UK>>
+}
+
+entity "CourseTags" as CourseTags {
+  *course_id : INT <<FK>>
+  *tag_id : INT <<FK>>
+}
+
+entity "Certificate" as Certificate {
+  *certificate_id : INT <<PK>>
+  --
+  *user_id : INT <<FK>>
+  *course_id : INT <<FK>>
+  issue_date : DATE
+  certificate_code : VARCHAR
+  certificate_url : VARCHAR
+}
+
+' Join Tables
+entity "CourseInstructors" as CourseInstructors {
+  *user_id : INT <<FK>>
+  *course_id : INT <<FK>>
+}
+
+' Token System
+entity "UserTokens" as UserTokens {
+  *user_id : INT <<FK>> <<PK>>
+  --
+  token_balance : INT
+  last_updated : TIMESTAMP
+}
+
+entity "TokenTransactions" as TokenTransactions {
+  *transaction_id : INT <<PK>>
+  --
+  *user_id : INT <<FK>>
+  amount : INT
+  transaction_type : VARCHAR
+  source_type : VARCHAR
+  source_id : INT
+  description : TEXT
+  transaction_date : TIMESTAMP
+}
+
+entity "CourseAccessPurchases" as CourseAccessPurchases {
+  *purchase_id : INT <<PK>>
+  --
+  *user_id : INT <<FK>>
+  *course_id : INT <<FK>>
+  tokens_spent : INT
+  purchase_date : TIMESTAMP
+}
+
+' RELATIONSHIPS
+
+' Course Structure
+Courses ||--o{ Modules : contains
+Modules ||--o{ Lessons : contains
+Modules ||--|| Quizzes : has
+Modules ||--o{ Assignments : has
+Courses ||--o{ Projects : has
+
+' User Roles
+Users }o--o{ Courses : teaches > CourseInstructors
+Users }o--o{ Courses : enrolls > Enrollments
+
+' Progress Tracking
+Users ||--o{ Certificate : earns
+Certificate }o--|| Courses : for
+Users ||--o{ UserTrophies : collects
+UserTrophies }o--|| Trophies : type
+UserTrophies }o--|| Courses : from
+
+' Ratings
+Users ||--o{ CourseRatings : gives
+CourseRatings }o--|| Courses : rates
+Users ||--o{ InstructorRatings : gives
+InstructorRatings }o--|| Users : rates
+Users ||--o{ StudentRatings : gives
+StudentRatings }o--|| Users : rates
+
+' Tags
+Tag }o--o{ Courses : categorizes > CourseTags
+
+' Difficulty & Trophy Relationship
+Courses }o--|| Difficulty : has
+Difficulty |o--o| Trophies : awards
+
+' Token System
+Users ||--|| UserTokens : has
+Users ||--o{ TokenTransactions : performs
+Users ||--o{ CourseAccessPurchases : makes
+CourseAccessPurchases }o--|| Courses : for
+
+@enduml 
