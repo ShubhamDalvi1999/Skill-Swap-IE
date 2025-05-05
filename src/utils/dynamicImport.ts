@@ -13,24 +13,41 @@
  */
 export function lazyImport<T extends object>(importFn: () => Promise<{ default: T }>): T {
   let module: T | null = null;
+  let importPromise: Promise<void> | null = null;
   
   return new Proxy({} as unknown as T, {
     get: (target, prop) => {
       if (!module) {
-        // This will be a promise on first access
-        const promise = importFn().then(mod => {
-          module = mod.default;
-        });
-        
-        // If they try to access before the import completes
-        if (!module) {
-          throw new Error('Module not loaded yet. Please await the import first.');
+        if (!importPromise) {
+          // Start the import if it hasn't started yet
+          importPromise = importFn()
+            .then(mod => {
+              module = mod.default;
+            })
+            .catch(err => {
+              console.error('Error lazily importing module:', err);
+              throw err;
+            });
         }
+        
+        // If the import is still in progress, throw an error
+        // This prevents accessing the module before it's ready
+        throw new Error('Module not loaded yet. Please await the import first.');
       }
       
       return module[prop as keyof T];
     }
   });
+}
+
+/**
+ * Pre-loads a module to ensure it's available when needed
+ * 
+ * @param importFn Function that returns a dynamic import
+ * @returns A promise that resolves when the module is loaded
+ */
+export function preloadModule<T>(importFn: () => Promise<{ default: T }>): Promise<T> {
+  return importFn().then(mod => mod.default);
 }
 
 /**
@@ -51,18 +68,25 @@ export function createSafeClass<Base, T extends Base>(
   }
   
   try {
-    return constructorFn(BaseClass);
+    // Create a wrapper around the base class to ensure it's properly initialized
+    const SafeBaseClass = class extends (BaseClass as any) {
+      constructor(...args: unknown[]) {
+        super(...args);
+      }
+    };
+    
+    // Now create the actual class using our safe base
+    return constructorFn(SafeBaseClass as any);
   } catch (error) {
     console.error('Error creating class:', error);
     
     // Fallback implementation if the class extension fails
-    // Need to use 'any' here as TypeScript cannot safely type this dynamic class extension
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return class FallbackClass extends (BaseClass as any) {
+    const FallbackClass = class {
       constructor(...args: unknown[]) {
-        super(...args);
         console.warn('Using fallback class implementation due to errors in class creation');
       }
-    } as unknown as new (...args: unknown[]) => T;
+    };
+    
+    return FallbackClass as unknown as new (...args: unknown[]) => T;
   }
 } 
