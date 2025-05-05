@@ -3,12 +3,26 @@ import { createBrowserClient } from '@supabase/ssr'
 import { UserProfile } from '@/types/user'
 import { AppError } from '@/lib/errors/AppError'
 import { SignInFormValues, SignUpFormValues } from '@/schemas/authSchemas'
+import { supabaseConfig } from '@/config/env'
+import { createMockSupabaseClient } from '@/utils/supabase/mockClient'
 
 export class AuthService {
-  private supabase = createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
-  )
+  private supabase;
+
+  constructor() {
+    const supabaseUrl = supabaseConfig.url;
+    const supabaseKey = supabaseConfig.anonKey;
+    
+    if (!supabaseUrl || !supabaseKey) {
+      if (process.env.NODE_ENV === 'production' && typeof window === 'undefined') {
+        this.supabase = createMockSupabaseClient();
+      } else {
+        this.supabase = createBrowserClient(supabaseUrl, supabaseKey);
+      }
+    } else {
+      this.supabase = createBrowserClient(supabaseUrl, supabaseKey);
+    }
+  }
 
   // Track login attempts to prevent brute force attacks
   private static loginAttempts = new Map<string, { count: number, lastAttempt: number }>()
