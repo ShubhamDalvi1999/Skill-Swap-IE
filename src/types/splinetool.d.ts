@@ -1,14 +1,14 @@
 declare module '@splinetool/react-spline' {
-  import { FC } from 'react';
+  import type * as React from 'react';
   
   interface SplineProps {
     scene: string;
     className?: string;
-    onLoad?: (splineApp: any) => void;
-    [key: string]: any;
+    onLoad?: (splineApp: unknown) => void;
+    [key: string]: unknown;
   }
   
-  const Spline: FC<SplineProps>;
+  const Spline: React.ComponentType<SplineProps>;
   
   export default Spline;
 } 

@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import React from 'react'
 
 const PLACEHOLDER_COURSES = [
   {
@@ -21,7 +21,7 @@ const PLACEHOLDER_COURSES = [
   }
 ]
 
-export const CourseProgress: FC = () => {
+export function CourseProgress() {
   return (
     <div className="bg-secondary/80 backdrop-blur-sm rounded-xl p-8 w-[360px]">
       <h3 className="text-2xl font-semibold mb-8">Course Progress</h3>
