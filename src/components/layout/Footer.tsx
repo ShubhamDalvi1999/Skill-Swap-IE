@@ -2,7 +2,8 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { FiGithub, FiTwitter, FiLinkedin, FiYoutube, FiGlobe } from 'react-icons/fi'
+import Icon from '@/components/ui/Icon'
+import { ICONS } from '@/lib/icons'
 import { cn } from '@/lib/utils'
 
 const footerLinks = {
@@ -25,10 +26,10 @@ const footerLinks = {
 }
 
 const socialLinks = [
-  { icon: FiGithub, href: 'https://github.com', label: 'GitHub' },
-  { icon: FiTwitter, href: 'https://twitter.com', label: 'Twitter' },
-  { icon: FiLinkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
-  { icon: FiYoutube, href: 'https://youtube.com', label: 'YouTube' },
+  { icon: 'Github', href: 'https://github.com', label: 'GitHub' },
+  { icon: 'Twitter', href: 'https://twitter.com', label: 'Twitter' },
+  { icon: 'Linkedin', href: 'https://linkedin.com', label: 'LinkedIn' },
+  { icon: 'Youtube', href: 'https://youtube.com', label: 'YouTube' },
 ]
 
 export default function Footer() {
@@ -55,7 +56,7 @@ export default function Footer() {
                   className="text-secondary-400 hover:text-primary-500 transition-colors"
                   aria-label={link.label}
                 >
-                  <link.icon className="h-6 w-6" />
+                  <Icon name={link.icon} className="h-6 w-6" />
                 </a>
               ))}
             </div>
@@ -99,8 +100,8 @@ export default function Footer() {
               ))}
             </ul>
             <div className="mt-6">
-              <button className="inline-flex items-center text-secondary-300 hover:text-primary-500 transition-colors">
-                <FiGlobe className="mr-2 h-5 w-5" />
+              <button type="button" className="inline-flex items-center text-secondary-300 hover:text-primary-500 transition-colors">
+                <Icon name="Globe" className="mr-2 h-5 w-5" />
                 <span>English</span>
               </button>
             </div>

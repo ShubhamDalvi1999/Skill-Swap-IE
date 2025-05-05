@@ -1,21 +1,22 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { User } from '@supabase/supabase-js'
-import { FiHome, FiBook, FiCode, FiLayers, FiUsers, FiBarChart2, FiMenu, FiX, FiChevronDown } from 'react-icons/fi'
+import type { User } from '@supabase/supabase-js'
+import Icon from '@/components/ui/Icon'
+import { ICONS } from '@/lib/icons'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { createClient } from '@/utils/supabase/client'
 
 const navLinks = [
-  { label: 'Dashboard', href: '/dashboard', icon: FiHome },
-  { label: 'Learn', href: '/learn', icon: FiBook },
-  { label: 'Practice', href: '/practice', icon: FiCode },
-  { label: 'Build', href: '/build', icon: FiLayers },
-  { label: 'Community', href: '/community', icon: FiUsers },
-  { label: 'Progress', href: '/progress', icon: FiBarChart2 },
+  { label: 'Dashboard', href: '/dashboard', icon: 'Home' },
+  { label: 'Learn', href: '/learn', icon: 'BookOpen' },
+  { label: 'Practice', href: '/practice', icon: 'Code' },
+  { label: 'Build', href: '/build', icon: 'Layers' },
+  { label: 'Community', href: '/community', icon: 'Users' },
+  { label: 'Progress', href: '/progress', icon: 'BarChart2' },
 ]
 
 export default function Navbar() {
@@ -68,7 +69,7 @@ export default function Navbar() {
                       : "text-secondary-300 hover:text-white hover:border-b-2 hover:border-secondary-700"
                   )}
                 >
-                  <link.icon className="mr-2 h-5 w-5" />
+                  <Icon name={link.icon} className="mr-2 h-5 w-5" />
                   {link.label}
                 </Link>
               ))}
@@ -79,6 +80,7 @@ export default function Navbar() {
               user ? (
                 <div className="relative">
                   <button
+                    type="button"
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                     className="flex items-center space-x-2 text-white hover:text-primary-500 focus:outline-none transition-colors duration-200"
                   >
@@ -86,7 +88,7 @@ export default function Navbar() {
                       {user.email?.[0].toUpperCase() || 'U'}
                     </div>
                     <span className="text-base">{user.email?.split('@')[0]}</span>
-                    <FiChevronDown className={cn("h-5 w-5 transition-transform duration-200", isDropdownOpen ? "transform rotate-180" : "")} />
+                    <Icon name="ChevronDown" className={cn("h-5 w-5 transition-transform duration-200", isDropdownOpen ? "transform rotate-180" : "")} />
                   </button>
                   {isDropdownOpen && (
                     <div className="absolute right-0 mt-2 w-48 bg-secondary-900 rounded-md shadow-lg py-1 z-10 border border-secondary-800">
@@ -105,6 +107,7 @@ export default function Navbar() {
                         Settings
                       </Link>
                       <button
+                        type="button"
                         onClick={async () => {
                           await supabase.auth.signOut()
                           setIsDropdownOpen(false)
@@ -130,13 +133,14 @@ export default function Navbar() {
           </div>
           <div className="flex md:hidden items-center">
             <button
+              type="button"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-secondary-300 hover:text-white hover:bg-secondary-800 focus:outline-none"
             >
               {isMenuOpen ? (
-                <FiX className="h-6 w-6" />
+                <Icon name="X" className="h-6 w-6" />
               ) : (
-                <FiMenu className="h-6 w-6" />
+                <Icon name="Menu" className="h-6 w-6" />
               )}
             </button>
           </div>
@@ -159,7 +163,7 @@ export default function Navbar() {
                 )}
                 onClick={() => setIsMenuOpen(false)}
               >
-                <link.icon className="mr-3 h-6 w-6" />
+                <Icon name={link.icon} className="mr-3 h-6 w-6" />
                 {link.label}
               </Link>
             ))}
@@ -180,6 +184,7 @@ export default function Navbar() {
                   Settings
                 </Link>
                 <button
+                  type="button"
                   onClick={async () => {
                     await supabase.auth.signOut()
                     setIsMenuOpen(false)
