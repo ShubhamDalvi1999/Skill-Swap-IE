@@ -1,5 +1,5 @@
 declare module 'next/link' {
-  import { ReactNode } from 'react';
+  import type { ReactNode } from 'react';
   
   export interface LinkProps {
     href: string;
@@ -19,7 +19,7 @@ declare module 'next/link' {
 }
 
 declare module 'next/image' {
-  import { ReactElement } from 'react';
+  import type { ReactElement, CSSProperties } from 'react';
   
   export interface ImageProps {
     src: string;
@@ -38,7 +38,7 @@ declare module 'next/image' {
     onLoadingComplete?: (result: { naturalWidth: number; naturalHeight: number }) => void;
     onError?: (error: Error) => void;
     className?: string;
-    style?: React.CSSProperties;
+    style?: CSSProperties;
     [key: string]: any;
   }
   
@@ -66,7 +66,7 @@ declare module 'next/navigation' {
 }
 
 declare module 'next/dynamic' {
-  import { ComponentType } from 'react';
+  import type { ComponentType } from 'react';
 
   export interface DynamicOptions {
     loading?: ComponentType;

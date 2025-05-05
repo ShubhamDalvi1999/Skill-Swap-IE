@@ -3,7 +3,7 @@
 
 import { useState, useEffect } from 'react'
 import type { ReactNode } from 'react'
-import { IconName } from '@/lib/icons'
+import type { IconName } from '@/lib/icons'
 
 interface IconProps {
   name: IconName

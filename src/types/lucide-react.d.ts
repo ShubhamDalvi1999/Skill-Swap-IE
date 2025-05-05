@@ -1,5 +1,5 @@
 declare module 'lucide-react' {
-  import { ComponentType } from 'react';
+  import type { ComponentType } from 'react';
 
   export interface LucideProps {
     color?: string;
@@ -7,7 +7,7 @@ declare module 'lucide-react' {
     strokeWidth?: string | number;
     className?: string;
     onClick?: () => void;
-    [key: string]: any;
+    [key: string]: unknown;
   }
   
   type LucideIcon = ComponentType<LucideProps>;
