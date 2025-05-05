@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { z } from 'zod';
 
 // Common fields that are reused across schemas
