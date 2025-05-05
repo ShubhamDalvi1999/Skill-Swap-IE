@@ -18,14 +18,11 @@ export function createMockSupabaseClient() {
     },
     from: (table: string) => ({
       select: () => ({
-        eq: () => ({
-          single: () => Promise.resolve({ data: null, error: null }),
-          data: null,
-          error: null
-        }),
+        single: () => Promise.resolve({ data: null, error: null }),
         data: null,
         error: null,
-        eq: () => ({
+        eq: (column: string, value: string | number | boolean) => ({
+          single: () => Promise.resolve({ data: null, error: null }),
           data: null,
           error: null
         })
