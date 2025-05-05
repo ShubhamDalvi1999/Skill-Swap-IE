@@ -1,7 +1,8 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { CheckCircle, XCircle, AlertCircle, Info, X } from 'lucide-react'
+import Icon from '@/components/ui/Icon'
+import { ICONS } from '@/lib/icons'
 
 export type ToastType = 'success' | 'error' | 'warning' | 'info'
 
@@ -36,13 +37,13 @@ const Toast: React.FC<ToastProps> = ({
   const getIcon = () => {
     switch (type) {
       case 'success':
-        return <CheckCircle className="h-5 w-5 text-green-500" />
+        return <Icon name={ICONS.success} className="h-5 w-5 text-green-500" />
       case 'error':
-        return <XCircle className="h-5 w-5 text-red-500" />
+        return <Icon name={ICONS.error} className="h-5 w-5 text-red-500" />
       case 'warning':
-        return <AlertCircle className="h-5 w-5 text-yellow-500" />
+        return <Icon name={ICONS.warning} className="h-5 w-5 text-yellow-500" />
       case 'info':
-        return <Info className="h-5 w-5 text-blue-500" />
+        return <Icon name={ICONS.info} className="h-5 w-5 text-blue-500" />
     }
   }
 
@@ -80,10 +81,11 @@ const Toast: React.FC<ToastProps> = ({
           {message && <p className="mt-1 text-sm text-gray-400">{message}</p>}
         </div>
         <button
+          type="button"
           onClick={handleClose}
           className="ml-4 flex-shrink-0 inline-flex text-gray-400 hover:text-gray-300"
         >
-          <X className="h-5 w-5" />
+          <Icon name={ICONS.close} className="h-5 w-5" />
         </button>
       </div>
     </div>

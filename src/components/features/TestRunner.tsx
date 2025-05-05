@@ -2,7 +2,8 @@
 
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { CheckCircle, XCircle, Clock, Play } from 'lucide-react'
+import Icon from '@/components/ui/Icon'
+import { ICONS } from '@/lib/icons'
 import { cn } from '@/lib/utils'
 
 type TestCase = {
@@ -23,13 +24,13 @@ export default function TestRunner({ testCases, onRunTests, isRunning }: TestRun
   const getStatusIcon = (status: TestCase['status']) => {
     switch (status) {
       case 'passed':
-        return <CheckCircle className="w-5 h-5 text-green-500" />
+        return <Icon name={ICONS.success} className="w-5 h-5 text-green-500" />
       case 'failed':
-        return <XCircle className="w-5 h-5 text-red-500" />
+        return <Icon name={ICONS.error} className="w-5 h-5 text-red-500" />
       case 'running':
-        return <Clock className="w-5 h-5 text-yellow-500 animate-spin" />
+        return <Icon name={ICONS.duration} className="w-5 h-5 text-yellow-500 animate-spin" />
       default:
-        return <Play className="w-5 h-5 text-gray-500" />
+        return <Icon name={ICONS.inProgress} className="w-5 h-5 text-gray-500" />
     }
   }
 
