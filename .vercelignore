@@ -1,2 +1,7 @@
 src/tests
-vitest.config.ts 
+vitest.config.ts
+prisma
+db-push.js
+force-seed.js
+scripts/seed-db.js
+scripts/setup-database.js 
