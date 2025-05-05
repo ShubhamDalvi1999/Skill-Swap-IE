@@ -1,14 +1,10 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import dynamic from 'next/dynamic'
-import 'swagger-ui-react/swagger-ui.css'
-
-// Dynamically import SwaggerUI to avoid SSR issues
-const SwaggerUI = dynamic(() => import('swagger-ui-react'), { ssr: false })
+import SwaggerUIComponent from '@/components/api/SwaggerUIComponent'
 
 export default function ApiDocsPage() {
-  const [spec, setSpec] = useState<any>(null)
+  const [spec, setSpec] = useState<Record<string, unknown> | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -32,11 +28,11 @@ export default function ApiDocsPage() {
         
         {isLoading ? (
           <div className="flex justify-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-500"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-500" />
           </div>
         ) : spec ? (
           <div className="bg-white p-6 rounded-lg shadow-lg">
-            <SwaggerUI spec={spec} />
+            <SwaggerUIComponent spec={spec} />
           </div>
         ) : (
           <div className="text-center py-12 text-error">
