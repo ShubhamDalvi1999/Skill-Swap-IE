@@ -1,9 +1,9 @@
 'use client'
 
-import React, { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useState } from 'react'
+import type { ReactNode } from 'react'
 import Icon from '@/components/ui/Icon'
 import { ICONS } from '@/lib/icons'
-import type { ReactNode } from 'react'
 
 type ToastType = 'success' | 'error' | 'info' | 'warning'
 

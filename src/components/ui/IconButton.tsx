@@ -1,14 +1,13 @@
 'use client'
 
-import React from 'react'
+import type { IconKey } from '@/lib/icons'
+import { getIconName } from '@/lib/icons'
 import Icon from './Icon'
-import { IconKey, getIconName } from '@/lib/icons'
 
 interface IconButtonProps {
   icon: IconKey
   onClick?: () => void
   size?: number
-  color?: string
   className?: string
   ariaLabel?: string
   variant?: 'default' | 'outline' | 'ghost' | 'primary'
@@ -19,7 +18,6 @@ const IconButton = ({
   icon,
   onClick,
   size = 20,
-  color,
   className = '',
   ariaLabel,
   variant = 'default',
@@ -47,7 +45,7 @@ const IconButton = ({
       <Icon
         name={getIconName(icon)}
         size={size}
-        color={color}
+        className={variant === 'primary' ? 'text-white' : ''}
       />
     </button>
   )
