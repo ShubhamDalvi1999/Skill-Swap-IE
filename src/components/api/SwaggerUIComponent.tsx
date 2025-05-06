@@ -7,7 +7,10 @@ import 'swagger-ui-react/swagger-ui.css'
 // Import SwaggerUI dynamically to avoid SSR issues
 const SwaggerUI = dynamic(
   () => import('swagger-ui-react').then((mod) => mod.default),
-  { ssr: false }
+  { 
+    ssr: false,
+    loading: () => <div>Loading Swagger UI...</div>
+  }
 )
 
 type SwaggerUIComponentProps = {
