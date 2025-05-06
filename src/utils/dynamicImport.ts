@@ -23,6 +23,11 @@ export function lazyImport<T extends object>(importFn: () => Promise<{ default: 
           importPromise = importFn()
             .then(mod => {
               module = mod.default;
+              if (!module) {
+                console.error('lazyImport: Imported module is undefined or null!', mod);
+              } else {
+                console.log('lazyImport: Module loaded successfully:', mod);
+              }
             })
             .catch(err => {
               console.error('Error lazily importing module:', err);
@@ -64,6 +69,7 @@ export function createSafeClass<Base, T extends Base>(
 ): new (...args: unknown[]) => T {
   // Make sure BaseClass exists before extending it
   if (!BaseClass || typeof BaseClass !== 'function') {
+    console.error('createSafeClass: BaseClass is undefined or not a function!', BaseClass);
     throw new Error('Cannot extend a null or undefined class. Ensure the base class is loaded.');
   }
   

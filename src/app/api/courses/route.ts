@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { AppError } from '@/lib/errors/AppError';
 import { createClient } from '@/lib/supabase/server';
 
+export const dynamic = 'force-dynamic';
+
 // Define types for Supabase response data
 interface CourseModule {
   id: string;
