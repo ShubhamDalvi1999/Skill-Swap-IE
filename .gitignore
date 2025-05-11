@@ -31,14 +31,7 @@ next-env.d.ts
 *.ps1
 *.sh
 
-#images 
-/images
-*.jpg
-*.png
-*.jpeg
-*.gif
-*.svg
-*.webp
+
 
 
 #prisma
