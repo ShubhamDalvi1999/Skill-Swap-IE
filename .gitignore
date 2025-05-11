@@ -31,9 +31,6 @@ next-env.d.ts
 *.ps1
 *.sh
 
-
-
-
 #prisma
 /prisma
 
@@ -47,20 +44,6 @@ next-env.d.ts
 /db
 
 
-# images
-/public/images
-
-#videos
-/public/videos
-
-#audio
-/public/audio
-
-#fonts
-/public/fonts
-
-#icons
-/public/icons
 
 .qodo
 
