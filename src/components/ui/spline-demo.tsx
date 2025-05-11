@@ -6,15 +6,29 @@ import dynamic from 'next/dynamic'
 import { Card } from "@/components/ui/card"
 import { Spotlight } from "@/components/ui/spotlight"
 
-// Dynamically import Spline with SSR disabled
-const Spline = dynamic(() => import('@splinetool/react-spline'), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full h-full flex items-center justify-center">
-      <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-500"></div>
-    </div>
-  )
-})
+// Dynamically import Spline with SSR disabled and robust error handling
+const Spline = dynamic(
+  () => import('@splinetool/react-spline')
+    .then(mod => {
+      if (!mod || !mod.default) {
+        console.error('SplineDemo: Module loaded but default export is undefined');
+        return () => <div className="w-full h-full bg-gray-100 flex items-center justify-center">Failed to load 3D scene</div>;
+      }
+      return mod.default;
+    })
+    .catch(err => {
+      console.error('SplineDemo: Error loading module:', err);
+      return () => <div className="w-full h-full bg-gray-100 flex items-center justify-center">Failed to load 3D scene</div>;
+    }),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-full flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-500"></div>
+      </div>
+    )
+  }
+)
 
 interface SplineDemoProps {
   scene: string;

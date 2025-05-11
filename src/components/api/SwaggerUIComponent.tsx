@@ -6,10 +6,23 @@ import 'swagger-ui-react/swagger-ui.css'
 
 // Import SwaggerUI dynamically to avoid SSR issues
 const SwaggerUI = dynamic(
-  () => import('swagger-ui-react').then((mod) => mod.default),
+  () => import('swagger-ui-react')
+    .then((mod) => {
+      if (!mod || !mod.default) {
+        console.error('SwaggerUI module loaded but default export is undefined');
+        // Return a minimal fallback component
+        return () => <div className="p-4 border rounded bg-gray-50">API documentation unavailable</div>;
+      }
+      return mod.default;
+    })
+    .catch(err => {
+      console.error('Error loading SwaggerUI module:', err);
+      // Return a fallback component
+      return () => <div className="p-4 border rounded bg-red-50">Failed to load API documentation</div>;
+    }),
   { 
     ssr: false,
-    loading: () => <div>Loading Swagger UI...</div>
+    loading: () => <div className="p-4">Loading Swagger UI documentation...</div>
   }
 )
 

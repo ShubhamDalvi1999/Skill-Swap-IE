@@ -6,10 +6,33 @@ import { useRef, useState, useEffect, Suspense } from 'react'
 import dynamic from 'next/dynamic'
 
 // Use Next.js dynamic import instead of React.lazy for better SSR compatibility
-const Spline = dynamic(() => import('@splinetool/react-spline'), { 
-  ssr: false,
-  suspense: true 
-})
+// Add error handling and fallback to prevent "Super constructor null" error
+const Spline = dynamic(
+  () => import('@splinetool/react-spline')
+    .then(mod => {
+      // Ensure the module is valid before returning
+      if (!mod || !mod.default) {
+        console.error('Spline module loaded but default export is undefined');
+        // Return a minimal fallback component to prevent null errors
+        return () => <div className="w-full h-full bg-gray-100 flex items-center justify-center">Failed to load 3D component</div>;
+      }
+      console.log('Spline module loaded successfully');
+      return mod.default;
+    })
+    .catch(err => {
+      console.error('Error loading Spline module:', err);
+      // Return a fallback component on error
+      return () => <div className="w-full h-full bg-gray-100 flex items-center justify-center">Failed to load 3D component</div>;
+    }),
+  { 
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-full flex items-center justify-center">
+        <span className="loader"></span>
+      </div>
+    )
+  }
+)
 
 interface SplineSceneProps {
   scene: string
