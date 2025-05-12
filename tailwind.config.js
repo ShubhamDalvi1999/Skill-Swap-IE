@@ -1,4 +1,28 @@
 /** @type {import('tailwindcss').Config} */
+
+function addVariablesForColors({ addBase, theme }) {
+  const allColors = flattenColorPalette(theme("colors"));
+  const newVars = Object.fromEntries(Object.entries(allColors).map(([k, v]) => [`--${k}`, v]));
+
+  addBase({ ":root": newVars });
+}
+
+const flattenColorPalette = (colors) => {
+  const flatColors = {};
+  
+  Object.entries(colors).forEach(([key, value]) => {
+    if (typeof value === 'object') {
+      Object.entries(value).forEach(([subKey, subValue]) => {
+        flatColors[`${key}-${subKey}`] = subValue;
+      });
+    } else {
+      flatColors[key] = value;
+    }
+  });
+  
+  return flatColors;
+};
+
 module.exports = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -139,5 +163,6 @@ module.exports = {
     require('@tailwindcss/forms'),
     require('@tailwindcss/typography'),
     require('tailwindcss-animate'),
+    addVariablesForColors,
   ],
 } 

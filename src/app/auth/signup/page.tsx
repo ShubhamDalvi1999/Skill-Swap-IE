@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { createBrowserClient } from '@supabase/ssr'
-import { Button } from '@/components/ui/button'
+import { Button as MovingButton } from '@/components/ui/moving-border'
 import { signUpSchema } from '@/schemas/authSchemas'
 
 export default function SignUp() {
@@ -249,9 +249,14 @@ export default function SignUp() {
             <p className="text-sm text-red-500">{errors.acceptTerms}</p>
           )}
 
-          <Button type="submit" className="w-full" disabled={loading}>
+          <MovingButton 
+            type="submit" 
+            className="w-full bg-secondary-800 hover:bg-secondary-700" 
+            borderClassName="opacity-80" 
+            disabled={loading}
+          >
             {loading ? 'Creating account...' : 'Sign up'}
-          </Button>
+          </MovingButton>
         </form>
 
         <div className="mt-4 text-sm text-gray-400 text-center">

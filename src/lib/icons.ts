@@ -4,18 +4,18 @@
  */
 export const ICONS = {
   // Navigation
-  home: 'Home',
-  learn: 'BookOpen',
-  practice: 'Code',
-  build: 'Award',
-  community: 'Users',
-  progress: 'BarChart',
+  home: 'LayoutDashboard',
+  learn: 'GraduationCap',
+  practice: 'Code2',
+  build: 'Rocket',
+  community: 'UsersRound',
+  progress: 'LineChart',
   settings: 'Settings',
   
   // User actions
-  profile: 'User',
+  profile: 'UserCircle',
   logout: 'LogOut',
-  notifications: 'Bell',
+  notifications: 'BellRing',
   
   // UI elements
   expand: 'ChevronDown',
@@ -26,33 +26,33 @@ export const ICONS = {
   menu: 'Menu',
   
   // Course status
-  completed: 'CheckCircle',
+  completed: 'CheckCircle2',
   inProgress: 'PlayCircle',
-  locked: 'Lock',
+  locked: 'ShieldLock',
   notStarted: 'Circle',
   
   // Social
   github: 'Github',
   twitter: 'Twitter',
   linkedin: 'Linkedin',
-  email: 'Mail',
+  email: 'MailPlus',
   
   // Event types
   calendar: 'Calendar', 
   webinar: 'Video',
-  workshop: 'Users',
-  assignment: 'FileText',
+  workshop: 'UsersRound',
+  assignment: 'ClipboardList',
   
   // Course information
-  duration: 'Clock',
-  students: 'Users',
-  rating: 'Star',
+  duration: 'Timer',
+  students: 'GraduationCap',
+  rating: 'StarHalf',
   
   // Alerts and feedback
-  success: 'CheckCircle',
+  success: 'CheckCircle2',
   error: 'XCircle',
-  warning: 'AlertCircle',
-  info: 'Info',
+  warning: 'AlertTriangle',
+  info: 'InfoIcon',
   
   // Fallback
   fallback: 'HelpCircle'

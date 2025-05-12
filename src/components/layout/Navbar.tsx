@@ -4,19 +4,18 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import type { User } from '@supabase/supabase-js'
-import Icon from '@/components/ui/Icon'
-import { ICONS } from '@/lib/icons'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { createClient } from '@/utils/supabase/client'
+import DynamicIcon from '@/components/ui/LucideIcon'
 
 const navLinks = [
-  { label: 'Dashboard', href: '/dashboard', icon: 'Home' },
-  { label: 'Learn', href: '/learn', icon: 'BookOpen' },
+  { label: 'Dashboard', href: '/dashboard', icon: 'LayoutGrid' },
+  { label: 'Learn', href: '/learn', icon: 'GraduationCap' },
   { label: 'Practice', href: '/practice', icon: 'Code' },
-  { label: 'Build', href: '/build', icon: 'Layers' },
+  { label: 'Build', href: '/build', icon: 'Rocket' },
   { label: 'Community', href: '/community', icon: 'Users' },
-  { label: 'Progress', href: '/progress', icon: 'BarChart2' },
+  { label: 'Progress', href: '/progress', icon: 'LineChart' },
 ]
 
 export default function Navbar() {
@@ -69,7 +68,7 @@ export default function Navbar() {
                       : "text-secondary-300 hover:text-white hover:border-b-2 hover:border-secondary-700"
                   )}
                 >
-                  <Icon name={link.icon} className="mr-2 h-5 w-5" />
+                  <DynamicIcon icon={link.icon} className="mr-2 h-5 w-5" />
                   {link.label}
                 </Link>
               ))}
@@ -88,7 +87,7 @@ export default function Navbar() {
                       {user.email?.[0].toUpperCase() || 'U'}
                     </div>
                     <span className="text-base">{user.email?.split('@')[0]}</span>
-                    <Icon name="ChevronDown" className={cn("h-5 w-5 transition-transform duration-200", isDropdownOpen ? "transform rotate-180" : "")} />
+                    <DynamicIcon icon="ChevronDown" className={cn("h-5 w-5 transition-transform duration-200", isDropdownOpen ? "transform rotate-180" : "")} />
                   </button>
                   {isDropdownOpen && (
                     <div className="absolute right-0 mt-2 w-48 bg-secondary-900 rounded-md shadow-lg py-1 z-10 border border-secondary-800">
@@ -97,14 +96,20 @@ export default function Navbar() {
                         className="block px-4 py-2 text-base text-secondary-200 hover:bg-secondary-800 hover:text-white"
                         onClick={() => setIsDropdownOpen(false)}
                       >
-                        Profile
+                        <div className="flex items-center">
+                          <DynamicIcon icon="CircleUser" className="mr-2 h-5 w-5" />
+                          Profile
+                        </div>
                       </Link>
                       <Link
                         href="/settings"
                         className="block px-4 py-2 text-base text-secondary-200 hover:bg-secondary-800 hover:text-white"
                         onClick={() => setIsDropdownOpen(false)}
                       >
-                        Settings
+                        <div className="flex items-center">
+                          <DynamicIcon icon="Settings" className="mr-2 h-5 w-5" />
+                          Settings
+                        </div>
                       </Link>
                       <button
                         type="button"
@@ -114,7 +119,10 @@ export default function Navbar() {
                         }}
                         className="block w-full text-left px-4 py-2 text-base text-error-500 hover:bg-secondary-800"
                       >
-                        Sign out
+                        <div className="flex items-center">
+                          <DynamicIcon icon="LogOut" className="mr-2 h-5 w-5" />
+                          Sign out
+                        </div>
                       </button>
                     </div>
                   )}
@@ -138,9 +146,9 @@ export default function Navbar() {
               className="inline-flex items-center justify-center p-2 rounded-md text-secondary-300 hover:text-white hover:bg-secondary-800 focus:outline-none"
             >
               {isMenuOpen ? (
-                <Icon name="X" className="h-6 w-6" />
+                <DynamicIcon icon="X" className="h-6 w-6" />
               ) : (
-                <Icon name="Menu" className="h-6 w-6" />
+                <DynamicIcon icon="Menu" className="h-6 w-6" />
               )}
             </button>
           </div>
@@ -163,7 +171,7 @@ export default function Navbar() {
                 )}
                 onClick={() => setIsMenuOpen(false)}
               >
-                <Icon name={link.icon} className="mr-3 h-6 w-6" />
+                <DynamicIcon icon={link.icon} className="mr-3 h-6 w-6" />
                 {link.label}
               </Link>
             ))}
@@ -174,14 +182,20 @@ export default function Navbar() {
                   className="block px-3 py-2 rounded-md text-lg font-medium text-secondary-300 hover:bg-secondary-800 hover:text-white"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Profile
+                  <div className="flex items-center">
+                    <DynamicIcon icon="CircleUser" className="mr-2 h-5 w-5" />
+                    Profile
+                  </div>
                 </Link>
                 <Link
                   href="/settings"
                   className="block px-3 py-2 rounded-md text-lg font-medium text-secondary-300 hover:bg-secondary-800 hover:text-white"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Settings
+                  <div className="flex items-center">
+                    <DynamicIcon icon="Settings" className="mr-2 h-5 w-5" />
+                    Settings
+                  </div>
                 </Link>
                 <button
                   type="button"
@@ -191,7 +205,10 @@ export default function Navbar() {
                   }}
                   className="block w-full text-left px-3 py-2 rounded-md text-lg font-medium text-error-500 hover:bg-secondary-800"
                 >
-                  Sign out
+                  <div className="flex items-center">
+                    <DynamicIcon icon="LogOut" className="mr-2 h-5 w-5" />
+                    Sign out
+                  </div>
                 </button>
               </>
             )}

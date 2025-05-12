@@ -71,7 +71,9 @@ export async function GET() {
     }
     
     // Get course IDs for further queries
-    const courseIds = (courses || []).map(course => course.id);
+    const courseIds = (courses || [])
+      .map(course => course.id)
+      .filter(id => id !== undefined && id !== null);
     
     if (courseIds.length === 0) {
       return NextResponse.json([]);
