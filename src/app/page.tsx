@@ -5,7 +5,6 @@ import React from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import Navbar from '@/components/layout/Navbar'
-import { SplineSceneBasic } from '@/components/ui/spline-demo'
 import CourseCarousel from '@/components/CourseCarousel'
 import PartnerLogos from '@/components/PartnerLogos'
 import FeaturesSection from '@/components/FeaturesSection'
@@ -20,7 +19,7 @@ export default function LandingPage() {
     <div className="min-h-screen flex flex-col relative overflow-hidden">
       {/* Top Hero Section with background */}
       <div className="relative bg-gradient-to-b from-blue-400 via-cyan-600 to-blue-900">
-        {/* Pixel art clouds and mountains background - only for hero and 3D sections */}
+        {/* Pixel art clouds and mountains background - only for hero section */}
         <div className="absolute inset-0 z-0 bg-[url('/images/pixel-bg.jpg')] bg-cover bg-center opacity-50 pixel-bg" />
         
         {/* Navbar */}
@@ -45,12 +44,6 @@ export default function LandingPage() {
               </div>
             </Link>
           </div>
-        </div>
-        
-        {/* 3D Spline Demo Section - still using the background */}
-        <div className="container mx-auto px-4 py-16 relative z-10">
-          <h2 className="text-3xl md:text-4xl text-white font-vt323 mb-10 tracking-wide text-center">EXPLORE NEW DIMENSIONS</h2>
-          <SplineSceneBasic />
         </div>
       </div>
       

@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { createClient } from '@/utils/supabase/client'
 import DynamicIcon from '@/components/ui/LucideIcon'
+import Logo from '@/components/ui/Logo'
 
 const navLinks = [
   { label: 'Dashboard', href: '/dashboard', icon: 'LayoutGrid' },
@@ -54,7 +55,7 @@ export default function Navbar() {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link href="/" className="flex-shrink-0 flex items-center">
-              <span className="text-primary-500 font-bold text-2xl">SkillSwap</span>
+              <Logo size="md" />
             </Link>
             <div className="hidden md:ml-10 md:flex md:space-x-8">
               {navLinks.map((link) => (

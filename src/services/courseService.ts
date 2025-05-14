@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { createBrowserClient } from '@supabase/ssr'
-import { 
+import type { 
   Course, 
   CourseDetails, 
   CourseSearchParams, 
@@ -15,8 +15,8 @@ import { AppError } from '@/lib/errors/AppError'
  */
 export class CourseService {
   private supabase = createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    process.env.NEXT_PUBLIC_SUPABASE_URL ,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY 
   )
 
   /**
@@ -272,7 +272,6 @@ export class CourseService {
         case 'rating':
           query = query.order('rating', { ascending: false })
           break
-        case 'newest':
         default:
           query = query.order('published_date', { ascending: false })
           break
@@ -484,7 +483,7 @@ export class CourseService {
         .from('lesson_completions')
         .select('lesson_id')
         .eq('user_id', userId)
-        .in('lesson_id', function(query) {
+        .in('lesson_id', (query) => {
           query.from('course_lessons')
             .select('id')
             .eq('course_id', courseId)

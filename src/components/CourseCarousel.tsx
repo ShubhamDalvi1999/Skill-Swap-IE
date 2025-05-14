@@ -14,7 +14,7 @@ const courses = [
     rating: 4.9,
     studentsCount: 12340,
     image: '/images/courses/tutorial-hell.jpg',
-    price: '$49.99',
+    price: '500 tokens',
     slug: 'tutorial-hell-to-projects'
   },
   {
@@ -24,7 +24,7 @@ const courses = [
     rating: 4.8,
     studentsCount: 8790,
     image: '/images/courses/portfolio.jpg',
-    price: '$39.99',
+    price: '400 tokens',
     slug: 'build-developer-portfolio'
   },
   {
@@ -34,7 +34,7 @@ const courses = [
     rating: 4.9,
     studentsCount: 10245,
     image: '/images/courses/problem-solving.jpg',
-    price: '$59.99',
+    price: '600 tokens',
     slug: 'problem-solving-programmers'
   },
   {
@@ -44,7 +44,7 @@ const courses = [
     rating: 4.7,
     studentsCount: 6530,
     image: '/images/courses/learning-path.jpg',
-    price: '$44.99',
+    price: '450 tokens',
     slug: 'personalized-learning-paths'
   },
   {
@@ -54,7 +54,7 @@ const courses = [
     rating: 4.8,
     studentsCount: 9120,
     image: '/images/courses/get-hired.jpg',
-    price: '$54.99',
+    price: '550 tokens',
     slug: 'projects-get-hired'
   },
   {
@@ -64,7 +64,7 @@ const courses = [
     rating: 4.7,
     studentsCount: 5890,
     image: '/images/courses/code-reviews.jpg',
-    price: '$39.99',
+    price: '400 tokens',
     slug: 'mastering-code-reviews'
   },
 ]
