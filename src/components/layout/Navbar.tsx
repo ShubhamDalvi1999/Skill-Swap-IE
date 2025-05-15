@@ -81,7 +81,7 @@ export default function Navbar() {
                     "inline-flex items-center px-1 pt-1 text-base font-medium transition-colors duration-200",
                     isActive(link.href)
                       ? "text-primary-500 border-b-2 border-primary-500"
-                      : "text-secondary-300 hover:text-white hover:border-b-2 hover:border-secondary-700"
+                      : "text-white hover:text-primary-500 hover:border-b-2 hover:border-secondary-700"
                   )}
                 >
                   <DynamicIcon icon={link.icon} className="mr-2 h-5 w-5" />
@@ -109,7 +109,7 @@ export default function Navbar() {
                     <div className="absolute right-0 mt-2 w-48 bg-secondary-900 rounded-md shadow-lg py-1 z-10 border border-secondary-800">
                       <Link
                         href="/profile"
-                        className="block px-4 py-2 text-base text-secondary-200 hover:bg-secondary-800 hover:text-white"
+                        className="block px-4 py-2 text-base text-white hover:bg-secondary-800 hover:text-primary-500"
                         onClick={() => setIsDropdownOpen(false)}
                       >
                         <div className="flex items-center">
@@ -119,7 +119,7 @@ export default function Navbar() {
                       </Link>
                       <Link
                         href="/settings"
-                        className="block px-4 py-2 text-base text-secondary-200 hover:bg-secondary-800 hover:text-white"
+                        className="block px-4 py-2 text-base text-white hover:bg-secondary-800 hover:text-primary-500"
                         onClick={() => setIsDropdownOpen(false)}
                       >
                         <div className="flex items-center">
@@ -183,7 +183,7 @@ export default function Navbar() {
                   "block px-3 py-2 rounded-md text-lg font-medium flex items-center",
                   isActive(link.href)
                     ? "bg-secondary-800 text-primary-500"
-                    : "text-secondary-300 hover:bg-secondary-800 hover:text-white"
+                    : "text-white hover:bg-secondary-800 hover:text-primary-500"
                 )}
                 onClick={() => setIsMenuOpen(false)}
               >
@@ -195,7 +195,7 @@ export default function Navbar() {
               <>
                 <Link
                   href="/profile"
-                  className="block px-3 py-2 rounded-md text-lg font-medium text-secondary-300 hover:bg-secondary-800 hover:text-white"
+                  className="block px-3 py-2 rounded-md text-lg font-medium text-white hover:bg-secondary-800 hover:text-primary-500"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <div className="flex items-center">
@@ -205,7 +205,7 @@ export default function Navbar() {
                 </Link>
                 <Link
                   href="/settings"
-                  className="block px-3 py-2 rounded-md text-lg font-medium text-secondary-300 hover:bg-secondary-800 hover:text-white"
+                  className="block px-3 py-2 rounded-md text-lg font-medium text-white hover:bg-secondary-800 hover:text-primary-500"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <div className="flex items-center">
@@ -233,7 +233,7 @@ export default function Navbar() {
                 <div className="flex items-center px-5">
                   <Link
                     href="/auth/signin"
-                    className="block w-full px-3 py-2 rounded-md text-lg font-medium text-center text-secondary-200 hover:bg-secondary-800 hover:text-white border border-secondary-700"
+                    className="block w-full px-3 py-2 rounded-md text-lg font-medium text-center text-white hover:bg-secondary-800 hover:text-primary-500 border border-secondary-700"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Sign in

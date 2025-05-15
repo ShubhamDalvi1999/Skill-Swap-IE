@@ -96,6 +96,7 @@ module.exports = {
         heading: ['var(--font-poppins)', 'Poppins', 'system-ui', 'sans-serif'],
         mono: ['var(--font-jetbrains-mono)', 'JetBrains Mono', 'monospace'],
         vt323: ['var(--font-vt323)', 'VT323', 'monospace'],
+        roboto: ['var(--font-roboto)', 'Roboto', 'system-ui', 'sans-serif'],
       },
       fontSize: {
         '2xs': '0.625rem', // 10px

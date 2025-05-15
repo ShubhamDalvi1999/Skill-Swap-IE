@@ -37,13 +37,13 @@ export default function LandingPage() {
         <div className="container mx-auto px-4 py-16 flex-1 flex flex-col items-center justify-center relative z-10 mt-16">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-3xl md:text-4xl text-white font-vt323 mb-2 tracking-wide">START YOUR</h1>
-            <div className="text-6xl md:text-8xl lg:text-9xl font-vt323 font-bold text-yellow-300 drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)] mb-6 tracking-wide leading-tight">
+            <div className="text-6xl md:text-8xl lg:text-9xl font-roboto font-bold text-yellow-300 drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)] mb-6 tracking-wide leading-tight">
               <div>Skill</div>
               <div>Adventure</div>
             </div>
             
-            <p className="text-white text-xl md:text-2xl mb-12 max-w-2xl mx-auto">
-              The most fun and beginner-friendly way to learn new skills. ⚔️✨
+            <p className="text-white text-2xl md:text-3xl mb-12 max-w-2xl mx-auto">
+              The most fun and beginner-friendly way to learn new skills. ✨
             </p>
             
             <Link href="/dashboard">

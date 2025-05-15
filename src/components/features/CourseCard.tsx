@@ -21,11 +21,12 @@ export default function CourseCard({ course, showProgress = false }: CourseCardP
     <Link href={`/courses/${course.id}`}>
       <div className="bg-secondary rounded-xl overflow-hidden border border-gray-800 hover:border-primary/50 transition-colors">
         {/* Course Image */}
-        <div className="relative h-48">
+        <div className="relative h-48 overflow-hidden">
           <img
             src={course.thumbnail || '/placeholder-course.jpg'}
             alt={course.title}
-            className="object-cover w-full h-full"
+            className="object-cover w-full h-full transition-transform hover:scale-105 duration-300"
+            style={{ objectPosition: 'center' }}
           />
           {isUserCourse && showProgress && (
             <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-700">

@@ -20,7 +20,7 @@ const PLACEHOLDER_COURSES: Course[] = [
     students_count: 1250,
     duration: 28,
     published_date: '2023-01-15',
-    thumbnail: '/images/courses/gen-ai.jpg',
+    thumbnail: '/images/courses/gen-ai/cover.jpg',
     price: 49.99
   },
   {
@@ -34,7 +34,7 @@ const PLACEHOLDER_COURSES: Course[] = [
     students_count: 2340,
     duration: 42,
     published_date: '2023-02-20',
-    thumbnail: '/images/courses/react.jpg',
+    thumbnail: '/images/courses/react-mastery/cover.jpg',
     price: 59.99
   },
   {
@@ -48,7 +48,7 @@ const PLACEHOLDER_COURSES: Course[] = [
     students_count: 3150,
     duration: 35,
     published_date: '2023-03-10',
-    thumbnail: '/images/courses/python.jpg',
+    thumbnail: '/images/courses/python foundations/python.png',
     price: 39.99
   },
   {
@@ -62,7 +62,7 @@ const PLACEHOLDER_COURSES: Course[] = [
     students_count: 1842,
     duration: 30,
     published_date: '2023-04-05',
-    thumbnail: '/images/courses/design.jpg',
+    thumbnail: '/images/courses/UIUX.png',
     price: 54.99
   }
 ]
