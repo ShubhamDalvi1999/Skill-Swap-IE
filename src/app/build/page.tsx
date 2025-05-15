@@ -4,52 +4,91 @@ import React from 'react'
 
 export default function BuildPage() {
   return (
-    <div className="space-y-8">
-      <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold">Build Projects</h1>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* Placeholder for project templates */}
-        {[...Array(6)].map((_, i) => (
-          <div 
-            key={i} 
-            className="bg-secondary rounded-xl p-6 border border-gray-800 hover:border-primary/50 transition-colors"
-          >
-            <div className="flex items-center gap-4 mb-4">
-              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
-                <span className="text-xl">🚀</span>
-              </div>
-              <div>
-                <h3 className="font-semibold">Project Template {i + 1}</h3>
-                <p className="text-sm text-gray-400">Estimated time: {(i + 1) * 2} hours</p>
-              </div>
-            </div>
-            <p className="text-gray-400 mb-4">
-              Build a complete project with step-by-step guidance.
-            </p>
-            <div className="flex justify-between items-center">
-              <span className="text-xs bg-gray-800 px-2 py-1 rounded">
-                {['React', 'Node.js', 'Full Stack', 'TypeScript', 'Next.js', 'Vue.js'][i % 6]}
-              </span>
-              <span className="text-xs text-gray-400">Coming soon</span>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="bg-secondary/50 rounded-xl p-8 border border-gray-800">
-        <div className="text-center max-w-2xl mx-auto">
-          <h2 className="text-2xl font-bold mb-4">This page is under construction</h2>
-          <p className="text-gray-400 mb-6">
-            We're working hard to bring you exciting project templates. 
-            Check back soon for updates!
-          </p>
-          <div className="inline-flex items-center justify-center gap-2 bg-primary text-secondary px-6 py-3 rounded-lg">
-            <span>Coming Soon</span>
+    <article className="space-y-6">
+      <header>
+        <h2 className="text-xl font-semibold mb-4">Project Implementation</h2>
+      </header>
+      
+      {/* File Structure Explorer */}
+      <section className="mb-6">
+        <h3 className="text-md font-medium text-primary mb-2">Project Files</h3>
+        <div className="bg-gray-900 rounded-lg p-4 border border-gray-700">
+          <ul className="space-y-1 text-sm">
+            <li className="flex items-center">
+              <span className="text-blue-400 mr-2">📁</span>
+              <span>src</span>
+            </li>
+            <li className="flex items-center ml-5">
+              <span className="text-yellow-400 mr-2">📄</span>
+              <span className="text-white">index.html</span>
+            </li>
+            <li className="flex items-center ml-5">
+              <span className="text-yellow-400 mr-2">📄</span>
+              <span>styles.css</span>
+            </li>
+            <li className="flex items-center ml-5">
+              <span className="text-yellow-400 mr-2">📄</span>
+              <span>app.js</span>
+            </li>
+            <li className="flex items-center">
+              <span className="text-blue-400 mr-2">📁</span>
+              <span>assets</span>
+            </li>
+            <li className="flex items-center">
+              <span className="text-gray-500 mr-2">📄</span>
+              <span className="text-gray-500">README.md</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+      
+      {/* Code Editor */}
+      <section className="mb-6">
+        <div className="flex justify-between items-center mb-2">
+          <h3 className="text-md font-medium text-primary">Code Editor</h3>
+          <div className="flex space-x-2">
+            <span className="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">HTML</span>
+            <span className="text-xs bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded">JavaScript</span>
+            <span className="text-xs bg-purple-500/20 text-purple-400 px-2 py-1 rounded">CSS</span>
           </div>
         </div>
-      </div>
-    </div>
+        <div className="bg-gray-900 rounded-lg p-4 font-mono text-sm text-gray-300 h-64 border border-gray-700">
+          <div className="text-gray-500">{"// Weather App - Main JavaScript"}</div>
+          <div className="text-blue-400">{"document.addEventListener('DOMContentLoaded', () => {"}</div>
+          <div className="ml-4 text-green-400">{"const searchForm = document.getElementById('search-form');"}</div>
+          <div className="ml-4 text-green-400">{"const cityInput = document.getElementById('city-input');"}</div>
+          <div className="ml-4 text-green-400">{"const weatherDisplay = document.getElementById('weather-display');"}</div>
+          <div className="ml-4" />
+          <div className="ml-4 text-yellow-400">{"// TODO: Add API key and fetch implementation"}</div>
+          <div className="text-blue-400">{"})"}</div>
+        </div>
+      </section>
+      
+      {/* Preview Section */}
+      <section>
+        <h3 className="text-md font-medium text-primary mb-2">App Preview</h3>
+        <div className="bg-white rounded-lg p-4 border border-gray-700 text-center h-48 flex items-center justify-center">
+          <div className="text-gray-800">
+            <p className="font-semibold">Weather App Preview</p>
+            <p className="text-sm text-gray-600">Your implementation will appear here</p>
+          </div>
+        </div>
+      </section>
+      
+      <footer className="flex justify-between mt-6">
+        <button 
+          type="button"
+          className="px-4 py-2 bg-secondary-800 rounded-md hover:bg-secondary-700 transition-colors"
+        >
+          Save Progress
+        </button>
+        <button 
+          type="button"
+          className="px-4 py-2 bg-primary rounded-md hover:bg-primary-600 transition-colors text-secondary"
+        >
+          Deploy Project
+        </button>
+      </footer>
+    </article>
   )
 } 

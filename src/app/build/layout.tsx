@@ -2,7 +2,6 @@
 
 import React from 'react'
 import WorkspaceLayout from '@/components/layout/WorkspaceLayout'
-import MainLayout from '@/components/layout/MainLayout'
 import type { ReactNode } from 'react'
 
 export default function BuildLayout({
@@ -54,42 +53,43 @@ export default function BuildLayout({
           </div>
         </div>
       }
+      maxWidth="max-w-7xl"
+      sidebarWidth="w-64"
+      showFooter={true}
     >
-      <div className="grid grid-cols-1 lg:grid-cols-2 h-[calc(100vh-4rem)]">
-        <div className="p-6 border-r border-gray-800 overflow-y-auto">
-          <div className="h-full overflow-y-auto">
-            <h2 className="text-xl font-semibold mb-4">Project Requirements</h2>
-            <div className="space-y-4">
-              <div>
-                <h3 className="text-md font-medium text-primary">Objective</h3>
-                <p className="text-gray-400">
-                  Build a simple weather application that fetches and displays weather data for a user-specified location.
-                </p>
-              </div>
-              
-              <div>
-                <h3 className="text-md font-medium text-primary">Requirements</h3>
-                <ul className="list-disc pl-5 text-gray-400 space-y-2">
-                  <li>Create a form that allows users to input a city name</li>
-                  <li>Fetch weather data from an API when the form is submitted</li>
-                  <li>Display the current temperature, conditions, and forecast</li>
-                  <li>Include error handling for failed API requests</li>
-                  <li>Make the UI responsive and user-friendly</li>
-                </ul>
-              </div>
-              
-              <div>
-                <h3 className="text-md font-medium text-primary">Resources</h3>
-                <ul className="list-disc pl-5 text-gray-400 space-y-2">
-                  <li>OpenWeather API documentation</li>
-                  <li>Example code for API integration</li>
-                  <li>UI design guidelines</li>
-                </ul>
-              </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 py-6">
+        <div className="bg-secondary rounded-xl p-6 border border-gray-800 overflow-y-auto">
+          <h2 className="text-xl font-semibold mb-4">Project Requirements</h2>
+          <div className="space-y-4">
+            <div>
+              <h3 className="text-md font-medium text-primary">Objective</h3>
+              <p className="text-gray-400">
+                Build a simple weather application that fetches and displays weather data for a user-specified location.
+              </p>
+            </div>
+            
+            <div>
+              <h3 className="text-md font-medium text-primary">Requirements</h3>
+              <ul className="list-disc pl-5 text-gray-400 space-y-2">
+                <li>Create a form that allows users to input a city name</li>
+                <li>Fetch weather data from an API when the form is submitted</li>
+                <li>Display the current temperature, conditions, and forecast</li>
+                <li>Include error handling for failed API requests</li>
+                <li>Make the UI responsive and user-friendly</li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 className="text-md font-medium text-primary">Resources</h3>
+              <ul className="list-disc pl-5 text-gray-400 space-y-2">
+                <li>OpenWeather API documentation</li>
+                <li>Example code for API integration</li>
+                <li>UI design guidelines</li>
+              </ul>
             </div>
           </div>
         </div>
-        <div className="p-6 overflow-y-auto">
+        <div className="bg-secondary rounded-xl p-6 border border-gray-800 overflow-y-auto">
           {children}
         </div>
       </div>

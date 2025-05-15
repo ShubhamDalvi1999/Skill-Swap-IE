@@ -251,8 +251,9 @@ export default function SignUp() {
 
           <MovingButton 
             type="submit" 
-            className="w-full bg-secondary-800 hover:bg-secondary-700" 
-            borderClassName="opacity-80" 
+            className="w-full bg-secondary-800 hover:bg-secondary-700"
+            containerClassName="w-full" 
+            borderClassName="opacity-40" 
             disabled={loading}
           >
             {loading ? 'Creating account...' : 'Sign up'}

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -27,8 +29,6 @@ body {
 }
 
 /* Pixel font style */
-@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
-
 .font-pixel {
   font-family: 'VT323', monospace;
   letter-spacing: 0.05em;
@@ -97,4 +97,23 @@ body {
 }
 .spline-interactive:hover {
   transform: scale(1.05);
+}
+
+/* Hide scrollbars for all browsers while maintaining scroll functionality */
+/* This will be applied application-wide */
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Hide WebKit (Chrome, Safari, newer Edge) scrollbars */
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* Maintain scrolling functionality */
+.overflow-y-auto,
+.overflow-x-auto,
+.overflow-auto {
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 } 

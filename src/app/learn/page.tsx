@@ -7,16 +7,16 @@ export default function LearnPage() {
   // return notFound()
 
   return (
-    <div className="space-y-8">
-      <div className="flex items-center justify-between">
+    <section className="space-y-8">
+      <header className="flex items-center justify-between">
         <h1 className="text-3xl font-bold">Learning Paths</h1>
-      </div>
+      </header>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* Placeholder for learning paths */}
         {[...Array(6)].map((_, i) => (
-          <div 
-            key={i} 
+          <article 
+            key={`learning-path-${i}`} 
             className="bg-secondary rounded-xl p-6 border border-gray-800 hover:border-primary/50 transition-colors"
           >
             <div className="flex items-center gap-4 mb-4">
@@ -34,7 +34,7 @@ export default function LearnPage() {
                 style={{ width: `${Math.floor(Math.random() * 100)}%` }}
               />
             </div>
-          </div>
+          </article>
         ))}
       </div>
 
@@ -50,6 +50,6 @@ export default function LearnPage() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   )
 } 

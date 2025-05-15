@@ -18,9 +18,17 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen flex flex-col relative overflow-hidden">
       {/* Top Hero Section with background */}
-      <div className="relative bg-gradient-to-b from-blue-400 via-cyan-600 to-blue-900">
+      <div className="relative">
         {/* Pixel art clouds and mountains background - only for hero section */}
-        <div className="absolute inset-0 z-0 bg-[url('/images/pixel-bg.jpg')] bg-cover bg-center opacity-50 pixel-bg" />
+        <div className="absolute inset-0 z-0 flex justify-center items-start">
+          <div className="container mx-auto px-4 h-full flex justify-center">
+            <img 
+              src="/images/pixel-bg.png" 
+              alt="Pixel background" 
+              className="w-full h-full object-cover object-top pixel-bg"
+            />
+          </div>
+        </div>
         
         {/* Navbar */}
         <Navbar />

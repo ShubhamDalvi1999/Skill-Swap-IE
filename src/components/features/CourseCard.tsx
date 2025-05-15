@@ -18,7 +18,7 @@ export default function CourseCard({ course, showProgress = false }: CourseCardP
   const isUserCourse = 'progress' in course && typeof course.progress === 'number'
 
   return (
-    <Link href={`/learn/${course.id}`}>
+    <Link href={`/courses/${course.id}`}>
       <div className="bg-secondary rounded-xl overflow-hidden border border-gray-800 hover:border-primary/50 transition-colors">
         {/* Course Image */}
         <div className="relative h-48">

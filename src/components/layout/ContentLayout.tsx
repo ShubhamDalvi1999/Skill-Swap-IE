@@ -10,6 +10,7 @@ interface ContentLayoutProps {
   sidebar?: ReactNode
   showProgress?: boolean
   progress?: number
+  maxWidth?: string
 }
 
 export default function ContentLayout({
@@ -17,6 +18,7 @@ export default function ContentLayout({
   sidebar,
   showProgress = false,
   progress = 0,
+  maxWidth = "max-w-7xl",
 }: ContentLayoutProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
 
@@ -44,7 +46,7 @@ export default function ContentLayout({
         )}
       </button>
 
-      {/* Main Content */}
+      {/* Main Content with centered container */}
       <div className="flex-1 overflow-hidden flex flex-col">
         {showProgress && (
           <div className="h-1 bg-gray-800">
@@ -54,7 +56,11 @@ export default function ContentLayout({
             />
           </div>
         )}
-        <div className="flex-1 overflow-y-auto p-6">{children}</div>
+        <div className="flex-1 overflow-y-auto">
+          <div className={`${maxWidth} mx-auto px-4 sm:px-6 lg:px-8 py-6`}>
+            {children}
+          </div>
+        </div>
       </div>
     </div>
   )

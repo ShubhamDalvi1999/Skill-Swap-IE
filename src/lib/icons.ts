@@ -10,6 +10,7 @@ export const ICONS = {
   build: 'Rocket',
   community: 'UsersRound',
   progress: 'LineChart',
+  teach: 'Presentation',
   settings: 'Settings',
   
   // User actions

@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Navbar from './Navbar'
-import Footer from './Footer'
+import Footer from '@/components/Footer'
 import LoadingSkeleton from '../shared/LoadingSkeleton'
 import type { ReactNode } from 'react'
 

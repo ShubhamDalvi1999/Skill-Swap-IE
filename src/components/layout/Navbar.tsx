@@ -10,13 +10,13 @@ import { createClient } from '@/utils/supabase/client'
 import DynamicIcon from '@/components/ui/LucideIcon'
 import Logo from '@/components/ui/Logo'
 
-const navLinks = [
-  { label: 'Dashboard', href: '/dashboard', icon: 'LayoutGrid' },
-  { label: 'Learn', href: '/learn', icon: 'GraduationCap' },
+// Standard nav links always shown
+const standardNavLinks = [
+  { label: 'Explore', href: '/dashboard', icon: 'LayoutGrid' },
   { label: 'Practice', href: '/practice', icon: 'Code' },
   { label: 'Build', href: '/build', icon: 'Rocket' },
   { label: 'Community', href: '/community', icon: 'Users' },
-  { label: 'Progress', href: '/progress', icon: 'LineChart' },
+  { label: 'Teach', href: '/teach', icon: 'Presentation' },
 ]
 
 export default function Navbar() {
@@ -26,6 +26,21 @@ export default function Navbar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const pathname = usePathname()
   const supabase = createClient()
+  
+  // Check if the user is currently viewing a course and extract courseId
+  const coursePath = pathname?.match(/\/courses\/([^\/]+)/)
+  const courseId = coursePath?.[1]
+  const isViewingCourse = !!courseId
+  
+  // Create the learn link with the correct href if a course is being viewed
+  const learnLink = isViewingCourse
+    ? { label: 'Learn', href: `/courses/${courseId}/learn`, icon: 'GraduationCap' }
+    : { label: 'Learn', href: '/learn', icon: 'GraduationCap' }
+  
+  // Dynamically construct the nav links based on whether user is viewing a course
+  const navLinks = isViewingCourse 
+    ? [learnLink, ...standardNavLinks]
+    : standardNavLinks
 
   useEffect(() => {
     const getUser = async () => {

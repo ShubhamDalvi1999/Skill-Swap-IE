@@ -80,7 +80,7 @@ export default function CommunityPage() {
   const [activeTab, setActiveTab] = useState<'feed' | 'events'>('feed')
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-6">
+    <div>
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-2xl font-bold">Community</h1>
         <div className="flex space-x-4">

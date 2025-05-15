@@ -20,7 +20,7 @@ const navItems: NavItem[] = [
   { icon: 'practice', label: 'Practice', href: '/practice' },
   { icon: 'build', label: 'Build', href: '/build' },
   { icon: 'community', label: 'Community', href: '/community' },
-  { icon: 'progress', label: 'Progress', href: '/progress' },
+  { icon: 'teach', label: 'Teach', href: '/teach' },
   { icon: 'settings', label: 'Settings', href: '/settings' },
 ]
 

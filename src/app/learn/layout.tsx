@@ -93,6 +93,7 @@ export default function LearnLayout({
             />
           </div>
         }
+        maxWidth="max-w-7xl"
       >
         {children}
       </ContentLayout>

@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import DynamicIcon from '@/components/ui/LucideIcon'
 
 // Company logos data
 const companies = [
@@ -41,13 +41,13 @@ export default function Footer() {
             </p>
           </div>
           <div className="flex-shrink-0">
-            <Link href="/signup">
+            <Link href="/auth/signup">
               <button
                 type="button"
-                className="px-6 py-3 bg-[#FFD644] text-[#1E1E1E] hover:bg-[#28D7A0] font-semibold rounded-lg inline-flex items-center"
+                className="px-6 py-3 bg-[#FFD644] hover:bg-[#28D7A0] text-[#1E1E1E] rounded-md font-semibold inline-flex items-center transition-colors duration-300"
               >
                 Start Your Journey
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <DynamicIcon icon="ChevronRight" className="ml-2 h-5 w-5" />
               </button>
             </Link>
           </div>
